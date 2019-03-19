@@ -81,14 +81,5 @@ namespace WorldOfCode.ECS
                 entities[i].Dispose();
             }
         }
-        
-        //TEMPORARY
-        public static void Update()
-        {
-            for (int i = 0; i < Systems.Count; i++)
-            {
-                Systems[i].Update();
-            }
-        }
     }
 }

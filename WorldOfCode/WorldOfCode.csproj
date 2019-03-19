@@ -38,7 +38,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EcsTest.cs" />
     <Compile Include="ECS\Component.cs" />
     <Compile Include="ECS\ECSManager.cs" />
     <Compile Include="ECS\Entity.cs" />

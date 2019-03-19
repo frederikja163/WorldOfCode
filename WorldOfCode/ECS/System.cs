@@ -50,8 +50,5 @@ namespace WorldOfCode.ECS
         /// </summary>
         /// TODO: Create event system we can use here
         public virtual void Init() { }
-        
-        //TEMPORARY
-        public virtual void Update(){ }
     }
 }

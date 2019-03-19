@@ -16,7 +16,7 @@ namespace WorldOfCode
         {
             Logger.Init(LogSeverity.Message);
             EcsManager.Init();
-            new EcsTest().Test();
+            
             Console.ReadKey();
         }
     }
