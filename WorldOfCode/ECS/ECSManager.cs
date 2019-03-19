@@ -17,7 +17,7 @@ namespace WorldOfCode.ECS
         /// <summary>
         /// A list of all the systems of the ECS system
         /// </summary>
-        private static readonly List<System> Systems = new List<System>();
+        private static readonly List<BaseSystem> Systems = new List<BaseSystem>();
         
         /// <summary>
         /// Initialize the Systems and set them up
@@ -29,21 +29,23 @@ namespace WorldOfCode.ECS
            List<Type> types =  Assembly.GetEntryAssembly().GetTypes().ToList();
            for (int i = 0; i < types.Count; i++)
            {
-               if (types[i].IsSubclassOf(typeof(System))) //Is the type derived from the system base class
+               if (types[i].IsSubclassOf(typeof(BaseSystem))) //Is the type derived from the system base class
                {
-                   Systems.Add(Activator.CreateInstance(types[i]) as System);
+                   Systems.Add(Activator.CreateInstance(types[i]) as BaseSystem);
                    //Initialize the system
                    //TODO: Make some sort of calling hierachy here instead
                    Systems.Last().Init();
                }
            }
+           
+           Logger.Msg("ECS manager initialized");
         }
 
         /// <summary>
         /// Add entities to the ECS system
         /// This allows the systems to see the entities
         /// </summary>
-        /// <param name="entities">The entities to add the the system</param>
+        /// <param name="entities">The entities to add to the system</param>
         public static void AddEntities(params Entity[] entities)
         {
             Entities.AddRange(entities);
@@ -53,6 +55,30 @@ namespace WorldOfCode.ECS
                 {
                     Systems[i].AddEntity(ref entities[j]);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Removes entities from the ECS system
+        /// Also notifies the systems and the entities that the entities have been terminated
+        /// </summary>
+        /// <param name="entities">Entities to remove from the system</param>
+        public static void RemoveEntities(params Entity[] entities)
+        {
+            //Notify the systems that entities will be terminated
+            for (int i = 0; i < Systems.Count; i++)
+            {
+                for (int j = 0; j < entities.Length; j++)
+                {
+                    Systems[i].RemoveEntity(entities[j]);
+                }
+            }
+
+            //Remove all the entities
+            for (int i = 0; i < entities.Length; i++)
+            {
+                Entities.Remove(entities[i]);
+                entities[i].Dispose();
             }
         }
         

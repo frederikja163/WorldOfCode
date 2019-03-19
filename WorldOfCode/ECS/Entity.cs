@@ -9,6 +9,9 @@ namespace WorldOfCode.ECS
     /// </summary>
     public class Entity : IDisposable
     {
+        /// <summary>
+        /// Components of the entity
+        /// </summary>
         private List<Component> _components = new List<Component>();
 
         /// <summary>

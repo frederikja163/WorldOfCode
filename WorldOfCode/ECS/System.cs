@@ -5,7 +5,7 @@ namespace WorldOfCode.ECS
     /// <summary>
     /// The base System for the ECS system, derive from this class to make a system
     /// </summary>
-    public abstract class System
+    public abstract class BaseSystem
     {
         /// <summary>
         /// All the entities managed by this system

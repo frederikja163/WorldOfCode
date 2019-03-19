@@ -26,7 +26,7 @@ namespace WorldOfCode
         }
     }
 
-    public class System1 : ECS.System
+    public class System1 : ECS.BaseSystem
     {
         protected override bool IsValidEntity(Entity entity)
         {
@@ -43,7 +43,7 @@ namespace WorldOfCode
         }
     }
 
-    public class System2 : ECS.System
+    public class System2 : ECS.BaseSystem
     {
         protected override bool IsValidEntity(Entity entity)
         {
