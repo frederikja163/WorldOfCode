@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace WorldOfCode.ECS
 {
@@ -23,7 +25,19 @@ namespace WorldOfCode.ECS
         /// </summary>
         public static void Init()
         {
-            throw new NotImplementedException();
+           //Get all types of the assembly
+           List<Type> types =  Assembly.GetEntryAssembly().GetTypes().ToList();
+           for (int i = 0; i < types.Count; i++)
+           {
+               if (types[i].IsSubclassOf(typeof(System))) //Is the type derived from the system base class
+               {
+                   //Create a system instance
+                   _systems.Add(Activator.CreateInstance(types[0]) as System);
+                   //Initialize the system
+                   //TODO: Make some sort of calling hierachy here instead
+                   _systems.Last().Init();
+               }
+           }
         }
     }
 }
