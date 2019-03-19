@@ -9,7 +9,7 @@ namespace WorldOfCode.ECS
     /// </summary>
     public class Entity : IDisposable
     {
-        private List<Component> _components;
+        private List<Component> _components = new List<Component>();
 
         /// <summary>
         /// Get a component of give type if it exists on this entity
@@ -26,7 +26,7 @@ namespace WorldOfCode.ECS
         /// Add components to this entity
         /// </summary>
         /// <param name="components">Components to add to this entity</param>
-        public void AddComponent(params Component[] components)
+        public void AddComponents(params Component[] components)
         {
             _components.AddRange(components);
         }

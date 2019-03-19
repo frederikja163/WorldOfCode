@@ -13,11 +13,11 @@ namespace WorldOfCode.ECS
         /// <summary>
         /// A list of all the entities of the ECS system
         /// </summary>
-        private static List<Entity> _entities;
+        private static readonly List<Entity> Entities = new List<Entity>();
         /// <summary>
         /// A list of all the systems of the ECS system
         /// </summary>
-        private static List<System> _systems;
+        private static readonly List<System> Systems = new List<System>();
         
         /// <summary>
         /// Initialize the Systems and set them up
@@ -31,13 +31,38 @@ namespace WorldOfCode.ECS
            {
                if (types[i].IsSubclassOf(typeof(System))) //Is the type derived from the system base class
                {
-                   //Create a system instance
-                   _systems.Add(Activator.CreateInstance(types[0]) as System);
+                   Systems.Add(Activator.CreateInstance(types[i]) as System);
                    //Initialize the system
                    //TODO: Make some sort of calling hierachy here instead
-                   _systems.Last().Init();
+                   Systems.Last().Init();
                }
            }
+        }
+
+        /// <summary>
+        /// Add entities to the ECS system
+        /// This allows the systems to see the entities
+        /// </summary>
+        /// <param name="entities">The entities to add the the system</param>
+        public static void AddEntities(params Entity[] entities)
+        {
+            Entities.AddRange(entities);
+            for (int i = 0; i < Systems.Count; i++)
+            {
+                for (int j = 0; j < entities.Length; j++)
+                {
+                    Systems[i].AddEntity(ref entities[j]);
+                }
+            }
+        }
+        
+        //TEMPORARY
+        public static void Update()
+        {
+            for (int i = 0; i < Systems.Count; i++)
+            {
+                Systems[i].Update();
+            }
         }
     }
 }

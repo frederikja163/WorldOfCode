@@ -1,4 +1,6 @@
-﻿namespace WorldOfCode
+﻿using WorldOfCode.ECS;
+
+namespace WorldOfCode
 {
     /// <summary>
     /// The entry point of the game
@@ -12,7 +14,8 @@
         /// </summary>
         public static void Main(string[] args)
         {
-            ECS.EcsManager.Init();
+            EcsManager.Init();
+            new EcsTest().Test();
         }
     }
 }
