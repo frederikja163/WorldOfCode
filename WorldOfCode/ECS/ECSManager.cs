@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace WorldOfCode.ECS
+namespace WorldOfCode
 {
     /// <summary>
     /// Manages the entire Entity Component System

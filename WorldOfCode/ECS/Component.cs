@@ -1,6 +1,6 @@
 using System;
 
-namespace WorldOfCode.ECS
+namespace WorldOfCode
 {
     /// <summary>
     /// The base component of the ECS system, derive from this class to make a component

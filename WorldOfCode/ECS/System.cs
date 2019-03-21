@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace WorldOfCode.ECS
+namespace WorldOfCode
 {
     /// <summary>
     /// The base System for the ECS system, derive from this class to make a system

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace WorldOfCode.ECS
+namespace WorldOfCode
 {
     /// <summary>
     /// An entity of the ECS system
