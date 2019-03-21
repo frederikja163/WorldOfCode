@@ -1,6 +1,4 @@
 ﻿using System;
-using OpenTK;
-using WorldOfCode.ECS;
 
 namespace WorldOfCode
 {

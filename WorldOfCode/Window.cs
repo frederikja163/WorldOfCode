@@ -1,7 +1,8 @@
 using System;
+using System.Reflection;
 using OpenTK;
 using OpenTK.Graphics;
-using WorldOfCode.ECS;
+using OpenTK.Input;
 
 namespace WorldOfCode
 {
@@ -32,5 +33,45 @@ namespace WorldOfCode
             
             base.OnLoad(e);
         }
+
+        #region Events
+        /// <summary>
+        /// Called every frame
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnUpdateFrame(FrameEventArgs e)
+        {
+            EventManager.Update();
+            base.OnUpdateFrame(e);
+        }
+        
+        /// <summary>
+        /// Called when a key is pressed
+        /// </summary>
+        /// <param name="e">e contains the argument of the event</param>
+        protected override void OnKeyPress(KeyPressEventArgs e)
+        {
+            EventManager.KeyPress(e);
+            base.OnKeyPress(e);
+        }
+        /// <summary>
+        /// Called when a key is released
+        /// </summary>
+        /// <param name="e">e contains the arguments of the event</param>
+        protected override void OnKeyDown(KeyboardKeyEventArgs e)
+        {
+            EventManager.KeyHold(e);
+            base.OnKeyDown(e);
+        }
+        /// <summary>
+        /// Called when a key is held for more than one frame
+        /// </summary>
+        /// <param name="e">e contains the arguments of the event</param>
+        protected override void OnKeyUp(KeyboardKeyEventArgs e)
+        {
+            EventManager.KeyRelease(e);
+            base.OnKeyUp(e);
+        }
+        #endregion Events
     }
 }
