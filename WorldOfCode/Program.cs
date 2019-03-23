@@ -12,7 +12,6 @@ namespace WorldOfCode
         /// Should only do 2 things
         ///     1. Initialize the logging system
         ///     2. Initialize the openTK window
-        /// Should only really create the window TODO: add opentk and rendering support
         /// </summary>
         public static void Main(string[] args)
         {

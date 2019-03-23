@@ -48,7 +48,6 @@ namespace WorldOfCode
             _bufferType = bufferType;
             
             Bind();
-            //TODO: Allow references to be passed to this function for better perfomance
             GL.BufferData(_bufferType, sizeof(TDataType) * data.Length, data, hint);
         }
 

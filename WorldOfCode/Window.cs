@@ -13,8 +13,6 @@ namespace WorldOfCode
     /// </summary>
     public class Window : GameWindow
     {
-        Renderer _renderer = new Renderer();
-        
         /// <summary>
         /// Create a window from basic parameters
         /// </summary>
@@ -33,7 +31,6 @@ namespace WorldOfCode
         {
             //Initialize stuff
             EcsManager.Init();
-            _renderer.Init();
             
             base.OnLoad(e);
         }
@@ -55,9 +52,9 @@ namespace WorldOfCode
         /// <param name="e">e contains the argument(s) of the function</param>
         protected override void OnRenderFrame(FrameEventArgs e)
         {
-            GL.Clear(ClearBufferMask.ColorBufferBit);
-            _renderer.Draw();
-            Context.SwapBuffers();
+
+            Renderer.Draw(Context);
+            
             base.OnRenderFrame(e);
         }
 

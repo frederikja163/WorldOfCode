@@ -10,13 +10,21 @@ namespace WorldOfCode
     public static class EventManager
     {
         /// <summary>
-        /// Called every frame
+        /// Called every frame when it is updated
         /// </summary>
         public delegate void UpdateEvent();
         /// <summary>
-        /// Called every frame
+        /// Called every frame when it is updated
         /// </summary>
         public static UpdateEvent Update = () => { };
+        /// <summary>
+        /// Called every frame when it is rendered
+        /// </summary>
+        public delegate void DrawEvent();
+        /// <summary>
+        /// Called every frame when it is rendered
+        /// </summary>
+        public static DrawEvent Draw = () => { };
 
         /// <summary>
         /// Called when a key is pressed
