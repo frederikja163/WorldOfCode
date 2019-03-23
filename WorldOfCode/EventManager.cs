@@ -16,7 +16,7 @@ namespace WorldOfCode
         /// <summary>
         /// Called every frame
         /// </summary>
-        public static UpdateEvent Update;
+        public static UpdateEvent Update = () => { };
 
         /// <summary>
         /// Called when a key is pressed
@@ -26,7 +26,7 @@ namespace WorldOfCode
         /// <summary>
         /// Called when a keyboard key is pressed
         /// </summary>
-        public static KeyPressEvent KeyPress;
+        public static KeyPressEvent KeyPress = (e) => { };
 
         /// <summary>
         /// Called when a key is released
@@ -36,7 +36,7 @@ namespace WorldOfCode
         /// <summary>
         /// Called when a keyboard key is released
         /// </summary>
-        public static KeyReleaseEvent KeyRelease;
+        public static KeyReleaseEvent KeyRelease = (e) => { };
         
         /// <summary>
         /// Called when a key is held for more than one frame
@@ -46,6 +46,6 @@ namespace WorldOfCode
         /// <summary>
         /// Called when a keyboard key is held for more than one frame
         /// </summary>
-        public static KeyHoldEvent KeyHold;
+        public static KeyHoldEvent KeyHold = (e) => { };
     }
 }

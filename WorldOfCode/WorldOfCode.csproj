@@ -52,12 +52,21 @@
     <Compile Include="Logger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rendering\BufferLayout.cs" />
     <Compile Include="Rendering\BufferObject.cs" />
+    <Compile Include="Rendering\Renderer.cs" />
+    <Compile Include="Rendering\Shader.cs" />
+    <Compile Include="Rendering\VertexArrayObjects.cs" />
     <Compile Include="Window.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="basic.shade">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

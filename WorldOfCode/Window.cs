@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using OpenTK;
 using OpenTK.Graphics;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 
 namespace WorldOfCode
@@ -12,6 +13,8 @@ namespace WorldOfCode
     /// </summary>
     public class Window : GameWindow
     {
+        Renderer _renderer = new Renderer();
+        
         /// <summary>
         /// Create a window from basic parameters
         /// </summary>
@@ -30,6 +33,7 @@ namespace WorldOfCode
         {
             //Initialize stuff
             EcsManager.Init();
+            _renderer.Init();
             
             base.OnLoad(e);
         }
@@ -38,13 +42,25 @@ namespace WorldOfCode
         /// <summary>
         /// Called every frame
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">e contains the argument(s) of the function</param>
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
-            EventManager.Update();
+            EventManager.Update.Invoke();
             base.OnUpdateFrame(e);
         }
-        
+
+        /// <summary>
+        /// Called when a frame needs to be drawn
+        /// </summary>
+        /// <param name="e">e contains the argument(s) of the function</param>
+        protected override void OnRenderFrame(FrameEventArgs e)
+        {
+            GL.Clear(ClearBufferMask.ColorBufferBit);
+            _renderer.Draw();
+            Context.SwapBuffers();
+            base.OnRenderFrame(e);
+        }
+
         /// <summary>
         /// Called when a key is pressed
         /// </summary>

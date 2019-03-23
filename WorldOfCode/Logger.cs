@@ -62,7 +62,7 @@ namespace WorldOfCode
             #else
             RawLog("[Time since start] - Method\t\t\tmessage");
             #endif
-            Log(LogSeverity.Message, "Logger Initialized");
+            Msg("Logger Initialized");
         }
 
         #region Logging
@@ -104,13 +104,13 @@ namespace WorldOfCode
         /// </summary>
         /// <param name="logSeverity">The severity of the message</param>
         /// <param name="message">The message to log</param>
-        public static void Log(LogSeverity logSeverity, string message)
+        private static void Log(LogSeverity logSeverity, string message)
         {
             //Check if the message is servere enough to be logged
             if (_logLevel > logSeverity) { return; }
             
             //Get the calling method
-            StackFrame caller = new StackFrame(1, true);
+            StackFrame caller = new StackFrame(2, true);
             
             //Create/define the layout of the message
             #if DEBUG
