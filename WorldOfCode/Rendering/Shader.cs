@@ -24,13 +24,6 @@ namespace WorldOfCode
         /// <param name="shaderPath">Path of the shader</param>
         public void Init(string shaderPath)
         {
-            //If the shader is not clean return
-            if (!_isDisposed)
-            {
-                return;
-            }
-            _isDisposed = false;
-            
             //Read the shader file
             string fragmentSource = null;
             string vertexSource = null;
@@ -164,7 +157,7 @@ namespace WorldOfCode
         /// <summary>
         /// Has the shader been disposed
         /// </summary>
-        private bool _isDisposed = true;
+        private bool _isDisposed = false;
         /// <summary>
         /// Dispose the shader and clean up memory
         /// </summary>

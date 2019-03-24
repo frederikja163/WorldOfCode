@@ -57,6 +57,9 @@
     <Compile Include="Rendering\Renderer.cs" />
     <Compile Include="Rendering\Shader.cs" />
     <Compile Include="Rendering\VertexArrayObjects.cs" />
+    <Compile Include="src\Components\RenderAble.cs" />
+    <Compile Include="src\Systems\Initializer.cs" />
+    <Compile Include="src\Systems\RendererSystem.cs" />
     <Compile Include="Window.cs" />
   </ItemGroup>
   <ItemGroup>

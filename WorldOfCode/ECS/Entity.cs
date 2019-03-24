@@ -15,7 +15,7 @@ namespace WorldOfCode
         private List<Component> _components = new List<Component>();
 
         /// <summary>
-        /// Get a component of give type if it exists on this entity
+        /// Get a component of given type if it exists on this entity
         /// </summary>
         /// <typeparam name="TComponentType">The type of the component derived from the base Component class</typeparam>
         /// <returns>Null if component not found, otherwise the found entity</returns>

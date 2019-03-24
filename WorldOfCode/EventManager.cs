@@ -9,6 +9,8 @@ namespace WorldOfCode
     /// </summary>
     public static class EventManager
     {
+        #region Application
+        
         /// <summary>
         /// Called every frame when it is updated
         /// </summary>
@@ -17,6 +19,7 @@ namespace WorldOfCode
         /// Called every frame when it is updated
         /// </summary>
         public static UpdateEvent Update = () => { };
+        
         /// <summary>
         /// Called every frame when it is rendered
         /// </summary>
@@ -27,6 +30,21 @@ namespace WorldOfCode
         public static DrawEvent Draw = () => { };
 
         /// <summary>
+        /// Called when the program disposes and unloads all resources
+        /// </summary>
+        public delegate void DisposeEvent();
+        /// <summary>
+        /// Called when the program disposes and unloads all resources
+        /// </summary>
+        public static DisposeEvent Dispose = () => { };
+        
+        #endregion Application
+
+        
+        
+        #region Keyboard
+        
+        /// <summary>
         /// Called when a key is pressed
         /// </summary>
         /// <param name="e">e contains the arguments of the event</param>
@@ -35,7 +53,7 @@ namespace WorldOfCode
         /// Called when a keyboard key is pressed
         /// </summary>
         public static KeyPressEvent KeyPress = (e) => { };
-
+        
         /// <summary>
         /// Called when a key is released
         /// </summary>
@@ -55,5 +73,7 @@ namespace WorldOfCode
         /// Called when a keyboard key is held for more than one frame
         /// </summary>
         public static KeyHoldEvent KeyHold = (e) => { };
+        
+        #endregion Keyboard
     }
 }

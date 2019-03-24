@@ -16,6 +16,11 @@ namespace WorldOfCode
         private int _handle = -1;
 
         /// <summary>
+        /// The buffers this vertex array will manage
+        /// </summary>
+        private List<BufferObject> _buffers;
+        
+        /// <summary>
         /// Currently bound vertex array
         /// </summary>
         private static VertexArray _bound;
@@ -25,14 +30,8 @@ namespace WorldOfCode
         /// </summary>
         public void Init()
         {
-            //If the object is not clean return
-            if (!_isDisposed)
-            {
-                return;
-            }
-            _isDisposed = false;
-            
             //Initialize the object
+            _buffers = new List<BufferObject>();
             _handle = GL.GenVertexArray();
         }
 
@@ -41,11 +40,12 @@ namespace WorldOfCode
         /// </summary>
         /// <param name="bufferObject">Buffer object to add to the4 vertex array</param>
         /// <param name="bufferLayout">Buffer layout of the buffer object</param>
-        public void AddBuffer(BufferObject bufferObject, BufferLayout bufferLayout = null)
+        public void AddBuffer(ref BufferObject bufferObject, BufferLayout bufferLayout = null)
         {
             //Add the buffer object
             Bind();
             bufferObject.Bind();
+            _buffers.Add(bufferObject);
             //Add the buffer layout
             if (bufferLayout != null)
             {
@@ -82,7 +82,7 @@ namespace WorldOfCode
         /// <summary>
         /// Has the vertex array been disposed
         /// </summary>
-        private bool _isDisposed = true;
+        private bool _isDisposed = false;
         /// <summary>
         /// Dispose the vertex array and clean up memory
         /// </summary>
@@ -92,7 +92,13 @@ namespace WorldOfCode
             {
                 GL.DeleteVertexArray(_handle);
                 Unbind();
+
+                for (int i = 0; i < _buffers.Count; i++)
+                {
+                    _buffers[i].Dispose();
+                }
                 
+                _buffers = null;
                 _handle = -1;
                 _isDisposed = true;
             }

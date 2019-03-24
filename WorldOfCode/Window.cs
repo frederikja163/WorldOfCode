@@ -26,7 +26,7 @@ namespace WorldOfCode
         /// <summary>
         /// Load the game and initialize what needs to be initialized
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">e contains the argument(s) of the function</param>
         protected override void OnLoad(EventArgs e)
         {
             //Initialize stuff
@@ -53,9 +53,20 @@ namespace WorldOfCode
         protected override void OnRenderFrame(FrameEventArgs e)
         {
 
-            Renderer.Draw(Context);
+            Renderer.DrawEverything(Context);
             
             base.OnRenderFrame(e);
+        }
+
+        
+        /// <summary>
+        /// Called when the program disposes and unloads all resources
+        /// </summary>
+        /// <param name="e">e contains the argument(s) of the function</param>
+        protected override void OnUnload(EventArgs e)
+        {
+            EventManager.Dispose.Invoke();
+            base.OnUnload(e);
         }
 
         /// <summary>

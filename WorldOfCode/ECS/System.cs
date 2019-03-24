@@ -35,7 +35,7 @@ namespace WorldOfCode
 
         /// <summary>
         /// Check if a given entity is valid
-        /// Should be implemented by derived systems to specify wether or not the entity should be computed
+        /// Should be implemented by derived systems to specify whether or not the entity should be computed
         /// </summary>
         /// <param name="entity">The entity to check for components</param>
         /// <returns>True: Keep track of the entity, False: Dont keep track of the entity</returns>
@@ -48,7 +48,6 @@ namespace WorldOfCode
         /// Initialize the system
         /// Override this and make calls to the event system here to "subscribe" to the different events
         /// </summary>
-        /// TODO: Create event system we can use here
         public virtual void Init() { }
     }
 }

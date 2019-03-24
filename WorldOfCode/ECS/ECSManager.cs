@@ -32,11 +32,18 @@ namespace WorldOfCode
                if (types[i].IsSubclassOf(typeof(BaseSystem))) //Is the type derived from the system base class
                {
                    Systems.Add(Activator.CreateInstance(types[i]) as BaseSystem);
-                   //Initialize the system
-                   //TODO: Make some sort of calling hierachy here instead
-                   Systems.Last().Init();
                }
            }
+
+           //As some of the initializers create entities that all systems must see
+           //The systems are looped over once more here
+           //TODO: Make some sort of calling hierachy here instead
+           for (int i = 0; i < Systems.Count; i++)
+           {
+               Systems[i].Init();
+           }
+
+           EventManager.Dispose += () => RemoveEntities(Entities.ToArray());
            
            Logger.Msg("ECS manager initialized");
         }

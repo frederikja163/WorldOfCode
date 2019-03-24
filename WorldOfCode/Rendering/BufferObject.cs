@@ -36,13 +36,6 @@ namespace WorldOfCode
             BufferUsageHint hint = BufferUsageHint.StaticDraw)
             where TDataType : unmanaged
         {
-            //If the object is not clean return
-            if (!_isDisposed)
-            {
-                return;
-            }
-            _isDisposed = false;
-            
             //Initialize the buffer object
             _handle = GL.GenBuffer();
             _bufferType = bufferType;
@@ -74,7 +67,7 @@ namespace WorldOfCode
         /// <summary>
         /// Has the object been disposed
         /// </summary>
-        private bool _isDisposed = true;
+        private bool _isDisposed = false;
         /// <summary>
         /// Dispose the object and clean up memory
         /// </summary>
