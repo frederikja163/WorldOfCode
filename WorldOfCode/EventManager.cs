@@ -10,7 +10,6 @@ namespace WorldOfCode
     public static class EventManager
     {
         #region Application
-        
         /// <summary>
         /// Called every frame when it is updated
         /// </summary>
@@ -37,13 +36,30 @@ namespace WorldOfCode
         /// Called when the program disposes and unloads all resources
         /// </summary>
         public static DisposeEvent Dispose = () => { };
-        
+
+        /// <summary>
+        /// Called when the windows shifts focus
+        /// </summary>
+        public delegate void FocusChangedEvent();
+        /// <summary>
+        /// Called when the windows shifts focus
+        /// </summary>
+        public static FocusChangedEvent FocusChanged = () => { };
         #endregion Application
 
-        
+        #region Mouse
+        /// <summary>
+        /// Called when the mouse is moved
+        /// </summary>
+        /// <param name="e">e contains the arguments of the event</param>
+        public delegate void MouseMoveEvent(MouseMoveEventArgs e);
+        /// <summary>
+        /// Called when the mouse is moved
+        /// </summary>
+        public static MouseMoveEvent MouseMove = (e) => { };
+        #endregion Mouse
         
         #region Keyboard
-        
         /// <summary>
         /// Called when a key is pressed
         /// </summary>
@@ -73,7 +89,6 @@ namespace WorldOfCode
         /// Called when a keyboard key is held for more than one frame
         /// </summary>
         public static KeyHoldEvent KeyHold = (e) => { };
-        
         #endregion Keyboard
     }
 }

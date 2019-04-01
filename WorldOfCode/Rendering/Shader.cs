@@ -1,4 +1,5 @@
 using System.IO;
+using OpenTK;
 using OpenTK.Graphics.OpenGL4;
 
 namespace WorldOfCode
@@ -149,6 +150,76 @@ namespace WorldOfCode
 
         #region Uniforms
 
+        /// <summary>
+        /// Sets a uniform on the shader
+        /// </summary>
+        /// <param name="name">Name of the uniform</param>
+        /// <param name="value">The value of the uniform</param>
+        public void Uniform(string name, ref float value)
+        {
+            int location = GL.GetUniformLocation(_handle, name);
+            if (location == -1)
+            {
+                Logger.Warn($"{name} is not a valid uniform name");
+            }
+            GL.Uniform1(location, value);
+        }
+        /// <summary>
+        /// Sets a uniform on the shader
+        /// </summary>
+        /// <param name="name">Name of the uniform</param>
+        /// <param name="value">The value of the uniform</param>
+        public void Uniform(string name, ref Vector2 value)
+        {
+            int location = GL.GetUniformLocation(_handle, name);
+            if (location == -1)
+            {
+                Logger.Warn($"{name} is not a valid uniform name");
+            }
+            GL.Uniform2(location, value);
+        }
+        /// <summary>
+        /// Sets a uniform on the shader
+        /// </summary>
+        /// <param name="name">Name of the uniform</param>
+        /// <param name="value">The value of the uniform</param>
+        public void Uniform(string name, ref Vector3 value)
+        {
+            int location = GL.GetUniformLocation(_handle, name);
+            if (location == -1)
+            {
+                Logger.Warn($"{name} is not a valid uniform name");
+            }
+            GL.Uniform3(location, value);
+        }
+        /// <summary>
+        /// Sets a uniform on the shader
+        /// </summary>
+        /// <param name="name">Name of the uniform</param>
+        /// <param name="value">The value of the uniform</param>
+        public void Uniform(string name, ref Vector4 value)
+        {
+            int location = GL.GetUniformLocation(_handle, name);
+            if (location == -1)
+            {
+                Logger.Warn($"{name} is not a valid uniform name");
+            }
+            GL.Uniform4(location, value);
+        }
+        /// <summary>
+        /// Sets a uniform on the shader
+        /// </summary>
+        /// <param name="name">Name of the uniform</param>
+        /// <param name="value">The value of the uniform</param>
+        public void Uniform(string name, ref Matrix4 value)
+        {
+            int location = GL.GetUniformLocation(_handle, name);
+            if (location == -1)
+            {
+                Logger.Warn($"{name} is not a valid uniform name");
+            }
+            GL.UniformMatrix4(location, true, ref value);
+        }
         
 
         #endregion Uniforms

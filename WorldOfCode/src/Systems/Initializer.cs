@@ -1,3 +1,4 @@
+using OpenTK;
 using OpenTK.Graphics.OpenGL4;
 
 namespace WorldOfCode
@@ -42,6 +43,15 @@ namespace WorldOfCode
             //Create the entity
             Entity entity = new Entity();
             entity.AddComponents(new RenderAble(vertexArray));
+            EcsManager.AddEntities(entity);
+            
+            
+            //Create a basic player
+            Camera camera = new Camera();
+            camera.Position = Vector3.UnitZ * 3;
+            camera.Yaw = -90;
+            entity = new Entity();
+            entity.AddComponents(new PlayerInput(1.5f, 0.2f), camera);
             EcsManager.AddEntities(entity);
         }
     }

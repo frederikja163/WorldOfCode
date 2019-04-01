@@ -21,7 +21,9 @@ namespace WorldOfCode
         /// <param name="title">The title displayed at the top of the window</param>
         public Window(int width, int height, string title)
             : base(width, height, GraphicsMode.Default, title)
-        { }
+        {
+            _instance = this;
+        }
 
         /// <summary>
         /// Load the game and initialize what needs to be initialized
@@ -31,10 +33,38 @@ namespace WorldOfCode
         {
             //Initialize stuff
             EcsManager.Init();
-            
+
             base.OnLoad(e);
         }
 
+        #region StaticWindow
+        /// <summary>
+        /// The instance of the window to be used as static
+        /// </summary>
+        private static Window _instance;
+
+        /// <summary>
+        /// Is the cursor visible
+        /// </summary>
+        public static bool IsCursorVisible
+        {
+            get => _instance.CursorVisible;
+            set => _instance.CursorVisible = value;
+        }
+        /// <summary>
+        /// Is the window focused
+        /// </summary>
+        public static bool IsFocused => _instance.Focused;
+        /// <summary>
+        /// The window size with the X component being the width and the Y component being the height
+        /// </summary>
+        public static Vector2 WindowSize => new Vector2(_instance.Width, _instance.Height);
+        /// <summary>
+        /// The window position in vector form
+        /// </summary>
+        public static Vector2 WindowPosition => new Vector2(_instance.X, _instance.Y);
+        #endregion StaticWindow
+        
         #region Events
         /// <summary>
         /// Called every frame
@@ -42,10 +72,10 @@ namespace WorldOfCode
         /// <param name="e">e contains the argument(s) of the function</param>
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
+            Time.DeltaTime = (float)e.Time;
             EventManager.Update.Invoke();
             base.OnUpdateFrame(e);
         }
-
         /// <summary>
         /// Called when a frame needs to be drawn
         /// </summary>
@@ -57,8 +87,6 @@ namespace WorldOfCode
             
             base.OnRenderFrame(e);
         }
-
-        
         /// <summary>
         /// Called when the program disposes and unloads all resources
         /// </summary>
@@ -96,6 +124,23 @@ namespace WorldOfCode
             EventManager.KeyRelease(e);
             base.OnKeyUp(e);
         }
+        
+        /// <summary>
+        /// Called when the focus changes focus mode, ie. from unfocused to focused or vice versa
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnFocusedChanged(EventArgs e)
+        {
+            EventManager.FocusChanged();
+            base.OnFocusedChanged(e);
+        }
+
+        protected override void OnMouseMove(MouseMoveEventArgs e)
+        {
+            EventManager.MouseMove(e);
+            base.OnMouseMove(e);
+        }
+
         #endregion Events
     }
 }

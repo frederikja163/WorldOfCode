@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace WorldOfCode
 {
@@ -106,6 +107,7 @@ namespace WorldOfCode
         /// <param name="message">The message to log</param>
         private static void Log(LogSeverity logSeverity, string message)
         {
+            //TODO: Dont use the stackframe, instead use an attribute on the message perameter
             //Check if the message is servere enough to be logged
             if (_logLevel > logSeverity) { return; }
             

@@ -13,6 +13,7 @@ namespace WorldOfCode
         /// </summary>
         public static void Init()
         {
+            GL.Enable(EnableCap.DepthTest);
             GL.ClearColor(0, 0, 0, 1);
         }
 

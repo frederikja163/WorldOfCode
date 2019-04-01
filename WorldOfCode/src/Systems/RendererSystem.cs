@@ -38,6 +38,8 @@ namespace WorldOfCode
         private void Draw()
         {
             _shader.Bind();
+            _shader.Uniform("u_view", ref Camera.Main.View);
+            _shader.Uniform("u_projection", ref Camera.Main.Projection);
             for (int i = 0; i < Entities.Count; i++)
             {
                 RenderAble renderAble = Entities[i].GetComponent<RenderAble>();
