@@ -9,7 +9,7 @@ namespace WorldOfCode
         /// The Vao that will store both the VBO and the IBO of the renderAble
         /// </summary>
         public VertexArray Vao { get; set; }
-
+        
         /// <summary>
         /// Creates a new renderable
         /// </summary>
