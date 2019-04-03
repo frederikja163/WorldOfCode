@@ -43,7 +43,7 @@ namespace WorldOfCode
             for (int i = 0; i < Entities.Count; i++)
             {
                 RenderAble renderAble = Entities[i].GetComponent<RenderAble>();
-                Renderer.DrawTriangle(renderAble.Vao, 3);
+                Renderer.DrawPoint(renderAble.Vao);
             }
         }
     }

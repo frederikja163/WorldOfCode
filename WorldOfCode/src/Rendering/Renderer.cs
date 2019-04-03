@@ -60,7 +60,7 @@ namespace WorldOfCode
         /// <param name="offset">Offset of where to start drawing from</param>
         public static void DrawPoint(VertexArray vao, int indices = -1, int offset = 0)
         {
-            Draw(PrimitiveType.Lines, vao, indices, offset);
+            Draw(PrimitiveType.Points, vao, indices, offset);
         }
 
         /// <summary>

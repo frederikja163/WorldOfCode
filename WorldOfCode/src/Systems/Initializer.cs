@@ -16,12 +16,10 @@ namespace WorldOfCode
             //Initialize a test triangle
             //First generate all the necessary variables
             float[] vertices = {
-                -.5f, 0, 0,
-                0.5f, 0, 0,
-                0, 1f, 0
+                0, 0, 0
             };
             uint[] indices = {
-                0, 1, 2
+                0
             };
             VertexArray vertexArray = new VertexArray();
             VertexBuffer vbo = new VertexBuffer();
