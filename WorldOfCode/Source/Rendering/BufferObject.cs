@@ -30,12 +30,17 @@ namespace WorldOfCode
         /// <param name="data">The data to initialize the buffer object with</param>
         /// <param name="hint">Hint to where the data should be stored on the GPU</param>
         /// <typeparam name="TDataType">The type of data this buffer object will manage</typeparam>
-        public unsafe void Init<TDataType>
+        protected unsafe void Init<TDataType>
             (BufferTarget bufferType,
             TDataType[] data,
             BufferUsageHint hint = BufferUsageHint.StaticDraw)
             where TDataType : unmanaged
         {
+            if (_handle != -1)
+            {
+                Dispose();
+                _isDisposed = false;
+            }
             //Initialize the buffer object
             _handle = GL.GenBuffer();
             _bufferType = bufferType;
@@ -75,8 +80,8 @@ namespace WorldOfCode
         {
             if (!_isDisposed)
             {
-                GL.DeleteBuffer(_handle);
                 Unbind();
+                GL.DeleteBuffer(_handle);
                 
                 _handle = -1;
                 _isDisposed = true;

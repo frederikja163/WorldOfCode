@@ -24,21 +24,22 @@ namespace WorldOfCode
                 0, 1, 2
             };
             VertexArray vertexArray = new VertexArray();
-            BufferObject vbo = new BufferObject();
-            BufferObject ibo = new BufferObject();
+            VertexBuffer vbo = new VertexBuffer();
+            IndexBuffer ibo = new IndexBuffer();
             BufferLayout layout = new BufferLayout();
             
             //Initialize the buffer objects
             vertexArray.Init();
-            vbo.Init(BufferTarget.ArrayBuffer, vertices);
-            ibo.Init(BufferTarget.ElementArrayBuffer, indices);
+            vbo.Init(vertices);
+            ibo.Init(indices);
             
             //Set up the layout of the data
             layout.AddLayoutItem(VertexAttribPointerType.Float, 3);
             
             //Add the buffers to the VAO
-            vertexArray.AddBuffer(ref vbo, layout);
-            vertexArray.AddBuffer(ref ibo);
+            vertexArray.SetVbo(vbo);
+            vertexArray.SetIbo(ibo);
+            vertexArray.SetLayout(layout);
             
             //Create the entity
             Entity entity = new Entity();

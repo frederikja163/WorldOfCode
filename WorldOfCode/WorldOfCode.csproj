@@ -58,9 +58,11 @@
     <Compile Include="Source\General\Time.cs" />
     <Compile Include="Source\Rendering\BufferLayout.cs" />
     <Compile Include="Source\Rendering\BufferObject.cs" />
+    <Compile Include="Source\Rendering\IndexBuffer.cs" />
     <Compile Include="Source\Rendering\Renderer.cs" />
     <Compile Include="Source\Rendering\Shader.cs" />
     <Compile Include="Source\Rendering\VertexArrayObjects.cs" />
+    <Compile Include="Source\Rendering\VertexBuffer.cs" />
     <Compile Include="Source\Systems\Initializer.cs" />
     <Compile Include="Source\Systems\PlayerMovement.cs" />
     <Compile Include="Source\Systems\RendererSystem.cs" />
