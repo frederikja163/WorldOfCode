@@ -83,7 +83,7 @@ namespace WorldOfCode
         protected override void OnRenderFrame(FrameEventArgs e)
         {
 
-            Renderer.DrawEverything(Context);
+            Renderer.DrawEvent(Context);
             
             base.OnRenderFrame(e);
         }

@@ -24,7 +24,7 @@ namespace WorldOfCode
         {
             EventManager.Draw += Draw;
             EventManager.Dispose += Dispose;
-            _shader.Init("basic.shade");
+            _shader.Init("res/basic.shade");
         }
 
         private void Dispose()

@@ -26,8 +26,9 @@ namespace WorldOfCode
         public void Init(string shaderPath)
         {
             //Read the shader file
-            string fragmentSource = null;
-            string vertexSource = null;
+            string fragmentSource = null, 
+                vertexSource = null,
+                geometrySource = null;
             ShaderType shaderReadmode = ShaderType.VertexShaderArb;
             StreamReader file = new StreamReader(shaderPath);
             while (!file.EndOfStream)
@@ -57,6 +58,11 @@ namespace WorldOfCode
                                 case "vertex":
                                     shaderReadmode = ShaderType.VertexShader;
                                     continue;
+                                case "g":
+                                case "geo":
+                                case "geometry":
+                                    shaderReadmode = ShaderType.GeometryShader;
+                                    continue;
                                 default:
                                     Logger.Warn($"\"{arg}\" is not a valid shader type");
                                     break;
@@ -79,6 +85,9 @@ namespace WorldOfCode
                         break;
                     case ShaderType.FragmentShader:
                         fragmentSource += line + '\n';
+                        break;
+                    case ShaderType.GeometryShader:
+                        geometrySource += line + '\n';
                         break;
                     default:
                         break;
@@ -104,6 +113,11 @@ namespace WorldOfCode
             //Compile all the shaders
             int vert = CompileShader(vertexSource, ShaderType.VertexShader);
             int frag = CompileShader(fragmentSource, ShaderType.FragmentShader);
+            int geo = -1;
+            if (geometrySource != null)
+            {
+                geo = CompileShader(geometrySource, ShaderType.GeometryShader);
+            }
 
             //Create the shader program
             _handle = GL.CreateProgram();
@@ -111,6 +125,10 @@ namespace WorldOfCode
             //Attach the shaders to the program
             GL.AttachShader(_handle, vert);
             GL.AttachShader(_handle, frag);
+            if (geo != -1)
+            {
+                GL.AttachShader(_handle, geo);
+            }
             
             //Link the program
             GL.LinkProgram(_handle);
@@ -128,6 +146,11 @@ namespace WorldOfCode
             GL.DeleteShader(vert);
             GL.DetachShader(_handle, frag);
             GL.DeleteShader(frag);
+            if (geo != -1)
+            {
+                GL.DetachShader(_handle, geo);
+                GL.DeleteShader(geo);
+            }
         }
 
         /// <summary>

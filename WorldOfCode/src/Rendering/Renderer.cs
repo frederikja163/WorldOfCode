@@ -18,10 +18,10 @@ namespace WorldOfCode
         }
 
         /// <summary>
-        /// Manages the entire drawing sequence, from clearing to drawing to swapping the buffers
+        /// Manages the entire drawing scene, from clearing to drawing to swapping the buffers
         /// </summary>
         /// <param name="context">Context to swap after drawn</param>
-        public static void DrawEverything(IGraphicsContext context)
+        public static void DrawEvent(IGraphicsContext context)
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             
