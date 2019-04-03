@@ -8,6 +8,9 @@ namespace WorldOfCode
     /// </summary>
     public class PlayerMovement : BaseSystem
     {
+        /// <summary>
+        /// The last position for the mouse
+        /// </summary>
         private Vector2 _lastMousePos;
         
         /// <inheritdoc />
@@ -28,8 +31,23 @@ namespace WorldOfCode
             EventManager.Update += Update;
             EventManager.FocusChanged += FocusChanged;
             EventManager.MouseMove += MouseMove;
+            
+            CenterMouse();
+            
+            MouseState mouseInput = Mouse.GetState();
+            _lastMousePos = new Vector2(mouseInput.X, mouseInput.Y);
         }
 
+        /// <summary>
+        /// Center the mouse
+        /// TODO: This should be placed elsewhere (probs in the input system)
+        /// </summary>
+        private void CenterMouse()
+        {
+            Vector2 center = Window.WindowPosition + Window.WindowSize / 2;
+            Mouse.SetPosition(center.X, center.Y);
+        }
+        
         /// <summary>
         /// Called when the mouse is moved
         /// </summary>
@@ -38,8 +56,7 @@ namespace WorldOfCode
         {
             if (Window.IsFocused)
             {
-                Vector2 center = Window.WindowPosition + Window.WindowSize / 2;
-                Mouse.SetPosition(center.X, center.Y);
+                CenterMouse();
             }
         }
 
@@ -64,6 +81,11 @@ namespace WorldOfCode
             
             KeyboardState keyboardInput = Keyboard.GetState();
             MouseState mouseInput = Mouse.GetState();
+
+            if (keyboardInput.IsKeyDown(Key.Escape))
+            {
+                Window.Close();
+            }
             
             for (int i = 0; i < Entities.Count; i++)
             {
@@ -92,8 +114,6 @@ namespace WorldOfCode
 
                 camera.Yaw += delta.X * playerInput.MouseSensitivity;
                 camera.Pitch -= delta.Y * playerInput.MouseSensitivity;
-                
-                Logger.Msg($"{camera.Pitch} | {camera.Yaw}");
             }
         }
     }

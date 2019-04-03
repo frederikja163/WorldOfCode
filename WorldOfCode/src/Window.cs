@@ -63,6 +63,10 @@ namespace WorldOfCode
         /// The window position in vector form
         /// </summary>
         public static Vector2 WindowPosition => new Vector2(_instance.X, _instance.Y);
+        /// <summary>
+        /// Close the window and shut the application down
+        /// </summary>
+        public static void Close() => _instance.Exit();
         #endregion StaticWindow
         
         #region Events
