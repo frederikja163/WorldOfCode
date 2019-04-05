@@ -104,7 +104,7 @@ namespace WorldOfCode
                 if (!string.IsNullOrWhiteSpace(shaderInfoLog))
                 {
                     //TODO: See todo from the programInfoLog if nothing is there just remove this one
-                    Logger.Error($"Shader {shaderType.ToString()} failed to load from file {shaderPath} with error: {shaderInfoLog}");
+                    Logger.Error($"Shader {shaderType} failed to load from file {shaderPath} with error: {shaderInfoLog}");
                 }
 
                 return shader;
