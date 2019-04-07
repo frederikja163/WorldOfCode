@@ -11,42 +11,16 @@ void main(){
 
 #shader geo
 #version 330 core
-layout (points) in;
-layout (line_strip, max_vertices = 256) out;
-
-vec2 size = vec2(5, 5);
-
-uniform mat4 u_view;
-uniform mat4 u_projection;
-
-void CreateVertex(vec2 position, vec4 startPos, mat4 mat){
-    gl_Position = startPos + vec4(position.x, 0, position.y, 0) * mat;
-    EmitVertex();
-}
+layout (triangles) in;
+layout (line_strip, max_vertices = 4) out;
 
 void main(){
-    mat4 mat = u_view * u_projection;
-    vec4 startPos = gl_in[0].gl_Position - vec4(size.x, 0, size.y, 0)/2;
-    
-    for (int y = int(-size.y); y <= size.y; y++)
-    {
-        if (y % 2 == 1)
-        {
-            for (int x = 0; x <= size.x; x++)
-            {
-                CreateVertex(vec2(x-0.5, y+1), startPos, mat);
-                CreateVertex(vec2(x, y), startPos, mat);
-            }
-        }
-        if (y % 2 == 0)
-        {
-            for (int x = int(size.x); x >= 0; x--)
-            {
-                CreateVertex(vec2(x, y+1), startPos, mat);
-                CreateVertex(vec2(x-0.5, y), startPos, mat);
-            }
-        }
+    for (int i = 0; i < 3; i++){
+        gl_Position = gl_in[i].gl_Position;
+        EmitVertex();    
     }
+    gl_Position = gl_in[0].gl_Position;
+    EmitVertex();
     
     EndPrimitive();
 }
