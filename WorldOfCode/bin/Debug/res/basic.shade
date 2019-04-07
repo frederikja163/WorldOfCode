@@ -12,7 +12,7 @@ void main(){
 #shader geo
 #version 330 core
 layout (points) in;
-layout (line_strip, max_vertices = 100) out;
+layout (line_strip, max_vertices = 256) out;
 
 vec2 size = vec2(5, 5);
 
@@ -28,30 +28,25 @@ void main(){
     mat4 mat = u_view * u_projection;
     vec4 startPos = gl_in[0].gl_Position - vec4(size.x, 0, size.y, 0)/2;
     
-    for (int y = 0; y < size.y; y += 2)
+    for (int y = int(-size.y); y <= size.y; y++)
     {
-        for (int x = -1; x < size.x; x++)
+        if (y % 2 == 1)
         {
-            CreateVertex(vec2(x, y), startPos, mat);
-            CreateVertex(vec2(x+0.5, y+1), startPos, mat);
+            for (int x = 0; x <= size.x; x++)
+            {
+                CreateVertex(vec2(x-0.5, y+1), startPos, mat);
+                CreateVertex(vec2(x, y), startPos, mat);
+            }
         }
-        CreateVertex(vec2(size.x, y), startPos, mat);
-        for (int x = int(size.x); x >= 0; x--)
+        if (y % 2 == 0)
         {
-            CreateVertex(vec2(x, y+2), startPos, mat);
-            CreateVertex(vec2(x-0.5, y+1), startPos, mat);
+            for (int x = int(size.x); x >= 0; x--)
+            {
+                CreateVertex(vec2(x, y+1), startPos, mat);
+                CreateVertex(vec2(x-0.5, y), startPos, mat);
+            }
         }
-        CreateVertex(vec2(-0.5, y+1), startPos, mat);
     }
-    
-//    for (int i = 0; i < size.x*size.y; i++){
-//        if (i % 2 == 0){
-//            CreateVertex(vec2(i/2, 0), startPos, mat);
-//        }
-//        else{
-//            CreateVertex(vec2(0.5+i/2, 1), startPos, mat);
-//        }
-//    }
     
     EndPrimitive();
 }
