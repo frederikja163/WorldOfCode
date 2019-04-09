@@ -33,6 +33,7 @@ namespace WorldOfCode
             EventManager.MouseMove += MouseMove;
             
             CenterMouse();
+            Window.IsCursorVisible = !Window.IsFocused;
             
             MouseState mouseInput = Mouse.GetState();
             _lastMousePos = new Vector2(mouseInput.X, mouseInput.Y);

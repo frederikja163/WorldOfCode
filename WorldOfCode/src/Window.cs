@@ -32,6 +32,7 @@ namespace WorldOfCode
         protected override void OnLoad(EventArgs e)
         {
             //Initialize stuff
+            Map.Init();
             EcsManager.Init();
 
             base.OnLoad(e);
@@ -66,7 +67,7 @@ namespace WorldOfCode
         /// <summary>
         /// Close the window and shut the application down
         /// </summary>
-        public static void Close() => _instance.Exit();
+        public new static void Close() => _instance.Exit();
         #endregion StaticWindow
         
         #region Events

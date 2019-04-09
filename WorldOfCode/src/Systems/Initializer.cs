@@ -19,14 +19,17 @@ namespace WorldOfCode
 
             //Generate vertices
             Vector2 size = new Vector2(25, 25);
-            List<float> vertices = new List<float>();
+            List<TerrainVertex> vertices = new List<TerrainVertex>();
             for (int y = 0; y < size.Y; y++)
             {
                 for (int x = 0; x < size.X; x++)
                 {
+                    vertices.Add(Map.GetVertex(x + y%2*0.5f, y * (float)Math.Sin(1.0472)));
+                    /*
                     vertices.Add(x + y%2*0.5f);
                     vertices.Add(0);
                     vertices.Add(y * (float)Math.Sin(1.0472));
+                     */
                 }
             }
             
@@ -67,6 +70,7 @@ namespace WorldOfCode
             
             //Set up the layout of the data
             layout.AddLayoutItem(VertexAttribPointerType.Float, 3);
+            layout.AddLayoutItem(VertexAttribPointerType.Float, 4);
             
             //Add the buffers to the VAO
             vertexArray.SetVbo(vbo);
@@ -79,7 +83,6 @@ namespace WorldOfCode
             EcsManager.AddEntities(entity);
 
             #endregion Terrain
-            
             
             //Create the main camera
             Camera camera = new Camera();

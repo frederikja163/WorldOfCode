@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WorldOfCode</RootNamespace>
     <AssemblyName>WorldOfCode</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
@@ -55,17 +55,20 @@
     <Compile Include="src\ECS\System.cs" />
     <Compile Include="src\General\EventManager.cs" />
     <Compile Include="src\General\Logger.cs" />
+    <Compile Include="src\General\Map.cs" />
+    <Compile Include="src\General\TerrainVertex.cs" />
     <Compile Include="src\General\Time.cs" />
     <Compile Include="src\Rendering\BufferLayout.cs" />
     <Compile Include="src\Rendering\BufferObject.cs" />
     <Compile Include="src\Rendering\IndexBuffer.cs" />
     <Compile Include="src\Rendering\Renderer.cs" />
     <Compile Include="src\Rendering\Shader.cs" />
-    <Compile Include="src\Rendering\VertexArrayObjects.cs" />
+    <Compile Include="src\Rendering\VertexArray.cs" />
     <Compile Include="src\Rendering\VertexBuffer.cs" />
     <Compile Include="src\Systems\Initializer.cs" />
     <Compile Include="src\Systems\PlayerMovement.cs" />
     <Compile Include="src\Systems\RendererSystem.cs" />
+    <Compile Include="src\Vendor\FastNoise.cs" />
     <Compile Include="src\Window.cs" />
   </ItemGroup>
   <ItemGroup>
