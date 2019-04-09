@@ -18,18 +18,13 @@ namespace WorldOfCode
             #region Terrain
 
             //Generate vertices
-            Vector2 size = new Vector2(25, 25);
+            Vector2 size = new Vector2(500, 500);
             List<TerrainVertex> vertices = new List<TerrainVertex>();
             for (int y = 0; y < size.Y; y++)
             {
                 for (int x = 0; x < size.X; x++)
                 {
                     vertices.Add(Map.GetVertex(x + y%2*0.5f, y * (float)Math.Sin(1.0472)));
-                    /*
-                    vertices.Add(x + y%2*0.5f);
-                    vertices.Add(0);
-                    vertices.Add(y * (float)Math.Sin(1.0472));
-                     */
                 }
             }
             
@@ -89,7 +84,7 @@ namespace WorldOfCode
             camera.Position = Vector3.UnitZ * 3;
             camera.Yaw = -90;
             entity = new Entity();
-            entity.AddComponents(new PlayerInput(1.5f, 0.2f), camera);
+            entity.AddComponents(new PlayerInput(250f, 0.2f), camera);
             EcsManager.AddEntities(entity);
         }
     }
