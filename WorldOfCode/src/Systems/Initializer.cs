@@ -81,8 +81,8 @@ namespace WorldOfCode
             
             //Create the main camera
             Camera camera = new Camera();
-            camera.Position = Vector3.UnitZ * 3;
-            camera.Yaw = -90;
+            camera.Position = new Vector3(size.X/2f, 3, 0);
+            camera.Yaw = 90;
             entity = new Entity();
             entity.AddComponents(new PlayerInput(250f, 0.2f), camera);
             EcsManager.AddEntities(entity);
