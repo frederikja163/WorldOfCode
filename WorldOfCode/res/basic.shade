@@ -6,7 +6,10 @@ layout (location = 1) in vec4 col;
 uniform mat4 u_view;
 uniform mat4 u_projection;
 
+out vec4 color;
+
 void main(){
+    color = col;
     gl_Position = vec4(v_Pos, 1) * u_view * u_projection;
 }
 
@@ -15,7 +18,13 @@ void main(){
 layout (triangles) in;
 layout (line_strip, max_vertices = 4) out;
 
+in vec4[] color;
+
+out vec4 f_color;
+
 void main(){
+    f_color = color[0];
+
     for (int i = 0; i < 3; i++){
         gl_Position = gl_in[i].gl_Position;
         EmitVertex();    
@@ -29,8 +38,10 @@ void main(){
 #shader frag
 #version 330 core
 
-out vec4 f_color;
+in vec4 f_color;
+
+out vec4 p_color;
 
 void main(){
-    f_color = vec4(1, 0, 0, 1);
+    p_color = f_color;
 }

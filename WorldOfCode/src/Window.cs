@@ -4,6 +4,7 @@ using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
+using WorldOfCode.Modding;
 
 namespace WorldOfCode
 {
@@ -33,6 +34,7 @@ namespace WorldOfCode
         {
             //Initialize stuff
             Map.Init();
+            ModLoader.Init();
             EcsManager.Init();
 
             base.OnLoad(e);

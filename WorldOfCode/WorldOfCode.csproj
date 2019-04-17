@@ -34,14 +34,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="mscorlib" />
     <Reference Include="OpenTK, Version=3.0.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4">
       <HintPath>..\packages\OpenTK.3.0.1\lib\net20\OpenTK.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\..\..\..\..\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Drawing\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Drawing.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -58,6 +64,8 @@
     <Compile Include="src\General\Map.cs" />
     <Compile Include="src\General\TerrainVertex.cs" />
     <Compile Include="src\General\Time.cs" />
+    <Compile Include="src\Modding\Biome.cs" />
+    <Compile Include="src\Modding\ModLoader.cs" />
     <Compile Include="src\Rendering\BufferLayout.cs" />
     <Compile Include="src\Rendering\BufferObject.cs" />
     <Compile Include="src\Rendering\IndexBuffer.cs" />
@@ -76,6 +84,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="mods\biome_color.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="mods\biome_typography.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="res\basic.shade">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
