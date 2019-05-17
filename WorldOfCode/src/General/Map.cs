@@ -56,7 +56,7 @@ namespace WorldOfCode
             //Set the data for the vertex
             _height.SetFrequency(biome.Hill.Frequency);
             vertex.Position = new Vector3(x, (_height.GetPerlin(x, y) + 0.5f) * biome.Hill.Amplitude + biome.Hill.MinHeight, y);
-            vertex.Color = biome.Color;
+            vertex.Color = new Color4(0.8f, 0.5f, 0.9f, 1f);
             
             return vertex;
         }

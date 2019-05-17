@@ -78,6 +78,7 @@ namespace WorldOfCode
             }
             
             vao.Bind();
+            //TODO: Support non index based draw calls
             GL.DrawElements(primitive, indices, DrawElementsType.UnsignedInt, offset);
         }
     }

@@ -2365,8 +2365,4 @@ public class FastNoise
 		y += Lerp(ly0x, ly1x, ys) * perturbAmp;
 	}
 
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes

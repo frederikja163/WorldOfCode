@@ -3,18 +3,18 @@ namespace WorldOfCode
     /// <summary>
     /// Defines a component that can be rendered to the screen
     /// </summary>
-    public class RenderAble : Component
+    public class Terrain : Component
     {
         /// <summary>
         /// The Vao that will store both the VBO and the IBO of the renderAble
         /// </summary>
-        public VertexArray Vao { get; set; }
+        public VertexArray Vao { get; }
         
         /// <summary>
         /// Creates a new renderable
         /// </summary>
         /// <param name="vao">The vertex array object to store and draw</param>
-        public RenderAble(VertexArray vao)
+        public Terrain(VertexArray vao)
         {
             Vao = vao;
         }

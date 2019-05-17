@@ -35,6 +35,7 @@ namespace WorldOfCode
             //Initialize stuff
             Map.Init();
             ModLoader.Init();
+            Renderer.Init();
             EcsManager.Init();
 
             base.OnLoad(e);

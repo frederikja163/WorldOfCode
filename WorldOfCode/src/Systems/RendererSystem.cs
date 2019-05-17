@@ -14,7 +14,7 @@ namespace WorldOfCode
         /// </summary>
         protected override bool IsValidEntity(Entity entity)
         {
-            return entity.GetComponent<RenderAble>() != null;
+            return entity.GetComponent<Terrain>() != null;
         }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace WorldOfCode
         {
             EventManager.Draw += Draw;
             EventManager.Dispose += Dispose;
-            _shader.Init("res/basic.shade");
+            _shader.Init("res/terrain.shade");
         }
 
         private void Dispose()
@@ -42,8 +42,8 @@ namespace WorldOfCode
             _shader.Uniform("u_projection", ref Camera.Main.Projection);
             for (int i = 0; i < Entities.Count; i++)
             {
-                RenderAble renderAble = Entities[i].GetComponent<RenderAble>();
-                Renderer.DrawTriangle(renderAble.Vao);
+                Terrain terrain = Entities[i].GetComponent<Terrain>();
+                Renderer.DrawTriangle(terrain.Vao);
             }
         }
     }

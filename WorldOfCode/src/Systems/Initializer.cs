@@ -18,13 +18,13 @@ namespace WorldOfCode
             #region Terrain
 
             //Generate vertices
-            Vector2 size = new Vector2(1000, 1000);
+            Vector2 size = new Vector2(100, 100);
             List<TerrainVertex> vertices = new List<TerrainVertex>();
             for (int y = 0; y < size.Y; y++)
             {
                 for (int x = 0; x < size.X; x++)
                 {
-                    vertices.Add(Map.GetVertex(x + y%2*0.5f, y * (float)Math.Sin(1.0472)));
+                    vertices.Add(Map.GetVertex(x + y % 2 * 0.5f, y * (float) Math.Sin(1.0472)));
                 }
             }
             
@@ -46,9 +46,9 @@ namespace WorldOfCode
 
                     if (x != 0)
                     {
-                        AddIndex(x, y + y % 2);
+                        AddIndex(x, y);
                         AddIndex(x, y + 1);
-                        AddIndex(x - 1, y + 1);
+                        AddIndex(x - 1, y + (y+1)%2);
                     }
                 }
             }
@@ -74,7 +74,7 @@ namespace WorldOfCode
             
             //Create the entity
             Entity entity = new Entity();
-            entity.AddComponents(new RenderAble(vertexArray));
+            entity.AddComponents(new Terrain(vertexArray));
             EcsManager.AddEntities(entity);
 
             #endregion Terrain
