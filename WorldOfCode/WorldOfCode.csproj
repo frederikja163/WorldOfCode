@@ -59,6 +59,7 @@
     <Compile Include="src\ECS\ECSManager.cs" />
     <Compile Include="src\ECS\Entity.cs" />
     <Compile Include="src\ECS\System.cs" />
+    <Compile Include="src\General\Direction.cs" />
     <Compile Include="src\General\EventManager.cs" />
     <Compile Include="src\General\Logger.cs" />
     <Compile Include="src\General\Map.cs" />

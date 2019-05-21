@@ -1,3 +1,5 @@
+using OpenTK.Input;
+
 namespace WorldOfCode
 {
     /// <summary>
@@ -40,6 +42,11 @@ namespace WorldOfCode
             _shader.Bind();
             _shader.Uniform("u_view", ref Camera.Main.View);
             _shader.Uniform("u_projection", ref Camera.Main.Projection);
+            KeyboardState keyboardInput = Keyboard.GetState();
+            if (keyboardInput.IsKeyDown(Key.K))
+            {
+                Entities[0].GetComponent<Terrain>().MoveTerrain(Direction.Right);
+            }
             for (int i = 0; i < Entities.Count; i++)
             {
                 Terrain terrain = Entities[i].GetComponent<Terrain>();

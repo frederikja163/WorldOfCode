@@ -20,21 +20,24 @@ namespace WorldOfCode
         /// The data for the vertices
         /// </summary>
         private VertexBuffer _vbo;
+
         /// <summary>
-        /// Set the data for the vertices
+        /// The data for the vertices
         /// </summary>
-        /// <param name="value">The new vertex data</param>
-        public void SetVbo(VertexBuffer value)
+        public VertexBuffer Vbo
         {
-            //Make sure any previous VBOs are disposed
-            _vbo?.Dispose();
-            
-            //Set the VBO
-            _vbo = value;
-            Bind();
-            _vbo.Bind();
+            get => _vbo;
+            set
+            {
+                //Make sure any previous VBOs are disposed
+                _vbo?.Dispose();
+
+                //Set the VBO
+                _vbo = value;
+                Bind();
+                _vbo.Bind();
+            }
         }
-        
 
         /// <summary>
         /// The layout of the vertices
@@ -42,26 +45,29 @@ namespace WorldOfCode
         private BufferLayout _layout;
 
         /// <summary>
-        /// Set the layout of the vertices
+        /// The layout of the vertices
         /// </summary>
-        /// <param name="value">The new buffer layout</param>
-        public void SetLayout(BufferLayout value)
+        public BufferLayout Layout
         {
-            //Set the layout and the offset initially
-            _layout = value;
-            Bind();
-            int offset = 0;
-            //Loop over each element
-            for (int i = 0; i < _layout.Elements.Count; i++)
+            get => _layout;
+            set
             {
-                LayoutElement la = _layout.Elements[i];
+                //Set the layout and the offset initially
+                _layout = value;
+                Bind();
+                int offset = 0;
+                //Loop over each element
+                for (int i = 0; i < _layout.Elements.Count; i++)
+                {
+                    LayoutElement la = _layout.Elements[i];
 
-                //Tell openTK how the layout of the vertices is
-                GL.VertexAttribPointer(i, la.Count, la.Type, la.Normalized, _layout.Stride, offset);
-                GL.EnableVertexAttribArray(i);
+                    //Tell openTK how the layout of the vertices is
+                    GL.VertexAttribPointer(i, la.Count, la.Type, la.Normalized, _layout.Stride, offset);
+                    GL.EnableVertexAttribArray(i);
 
-                //Increment the offset
-                offset += LayoutElement.GetSizeOfType(la.Type) * la.Count;
+                    //Increment the offset
+                    offset += LayoutElement.GetSizeOfType(la.Type) * la.Count;
+                }
             }
         }
 
@@ -69,20 +75,25 @@ namespace WorldOfCode
         /// The order of the vertices
         /// </summary>
         private IndexBuffer _ibo;
+
         /// <summary>
-        /// Set the order of the vertices
+        /// The order of the vertices
         /// </summary>
-        /// <param name="value">The new index buffer</param>
-        public void SetIbo (IndexBuffer value)
+        public IndexBuffer Ibo
         {
-            //Make sure any previous IBOs are disposed
-            _ibo?.Dispose();
+            get => _ibo;
+            set
+            {
+                //Make sure any previous IBOs are disposed
+                _ibo?.Dispose();
             
-            //Set the IBO
-            _ibo = value;
-            Bind();
-            _ibo.Bind();
+                //Set the IBO
+                _ibo = value;
+                Bind();
+                _ibo.Bind();
+            }
         }
+        
         /// <summary>
         /// The amount of indices
         /// </summary>

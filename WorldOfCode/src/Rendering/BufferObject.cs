@@ -50,6 +50,18 @@ namespace WorldOfCode
         }
 
         /// <summary>
+        /// Change the data of the buffer
+        /// </summary>
+        /// <param name="data">The new data</param>
+        /// <param name="index">The index of where to start the data</param>
+        /// <typeparam name="TDataType">The type of data</typeparam>
+        public unsafe void ChangeData<TDataType>(TDataType[] data, int index = 0) where TDataType : unmanaged
+        {
+            Bind();
+            GL.BufferSubData(_bufferType, (IntPtr)(index * sizeof(TDataType)), data.Length * sizeof(TDataType) , data);
+        }
+
+        /// <summary>
         /// Binds this buffer object
         /// </summary>
         public void Bind()
