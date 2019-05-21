@@ -45,7 +45,7 @@ namespace WorldOfCode
             KeyboardState keyboardInput = Keyboard.GetState();
             if (keyboardInput.IsKeyDown(Key.K))
             {
-                Entities[0].GetComponent<Terrain>().MoveTerrain(Direction.Right);
+                Entities[0].GetComponent<Terrain>().MoveTerrain(Direction.Left);
             }
             for (int i = 0; i < Entities.Count; i++)
             {

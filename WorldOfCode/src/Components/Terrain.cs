@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using OpenTK;
 using OpenTK.Graphics.OpenGL4;
@@ -19,7 +20,7 @@ namespace WorldOfCode
         /// <summary>
         /// The vertices of the terrain
         /// </summary>
-        public List<TerrainVertex> Vertices { get; private set; }
+        public TerrainVertex[] Vertices { get; private set; }
 
         /// <summary>
         /// The size of the generated terrain
@@ -39,13 +40,13 @@ namespace WorldOfCode
         {
             position = Vector2.Zero;
             this.size = size;
-            Vertices = new List<TerrainVertex>((int)size.X);
+            Vertices = new TerrainVertex[(int)(size.X * size.Y)];
             //Generate vertices
             for (int y = 0; y < size.Y; y++)
             {
                 for (int x = 0; x < size.X; x++)
                 {
-                    Vertices.Add(GenerateVertex(x, y));
+                    this[x, y] = GenerateVertex(x, y);
                 }
             }
             
@@ -81,7 +82,7 @@ namespace WorldOfCode
             
             //Initialize the buffer objects
             Vao.Init();
-            vbo.Init(Vertices.ToArray());
+            vbo.Init(Vertices);
             ibo.Init(indices.ToArray());
             
             //Set up the layout of the data
@@ -92,6 +93,12 @@ namespace WorldOfCode
             Vao.Vbo = vbo;
             Vao.Ibo = ibo;
             Vao.Layout = layout;
+        }
+
+        private TerrainVertex this[int x, int y]
+        {
+            get => Vertices[x + y * (int) size.Y];
+            set { Vertices[x + y * (int) size.Y] = value; }
         }
 
         private TerrainVertex GenerateVertex(int x, int y)
@@ -108,28 +115,34 @@ namespace WorldOfCode
                 {
                     case Direction.Left:
                         position += new Vector2(0, 1);
-                        Vertices.RemoveRange(0, (int)size.X);
+                        for (int y = 1; y < size.Y; y++)
+                        {
+                            for (int x = 0; x < size.X; x++)
+                            {
+                                this[x, y-1] = this[x, y];
+                            }
+                        }
                         for (int x = 0; x < size.X; x++)
                         {
-                            Vertices.Add(GenerateVertex((int)position.X + x, (int)position.Y + (int)size.Y));
+                            this[x, (int)size.Y - 1] = GenerateVertex((int) position.X + x, (int)( position.Y + size.Y));
                         }
                         break;
                     case Direction.Right:
-                        position -= new Vector2(0, 1);
-                        Vertices.RemoveRange(Vertices.Count - (int)size.X, (int)size.X);
-                        List<TerrainVertex> verts = new List<TerrainVertex>();
-                        for (int x = (int)size.X - 1; x >= 0; x--)
-                        {
-                            verts.Add(GenerateVertex((int)position.X - x + (int)size.X, (int)position.Y));
-                        }
-                        Vertices.InsertRange(0, verts);
+//                        position -= new Vector2(0, 1);
+//                        Vertices.RemoveRange(Vertices.Count - (int)size.X, (int)size.X);
+//                        List<TerrainVertex> verts = new List<TerrainVertex>();
+//                        for (int x = (int)size.X - 1; x >= 0; x--)
+//                        {
+//                            verts.Add(GenerateVertex((int)position.X - x + (int)size.X, (int)position.Y));
+//                        }
+//                        Vertices.InsertRange(0, verts);
                         break;
                     case Direction.Up:
                     case Direction.Down:
                         throw new ArgumentException("Invalid direction, direction must be either forward, backward, right or left.");
                 }
             }
-            Vao.Vbo.ChangeData(Vertices.ToArray());
+            Vao.Vbo.ChangeData(Vertices);
             Logger.Msg("end");
         }
 
