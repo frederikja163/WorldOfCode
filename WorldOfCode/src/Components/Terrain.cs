@@ -115,27 +115,19 @@ namespace WorldOfCode
                 {
                     case Direction.Left:
                         position += new Vector2(0, 1);
-                        for (int y = 1; y < size.Y; y++)
-                        {
-                            for (int x = 0; x < size.X; x++)
-                            {
-                                this[x, y-1] = this[x, y];
-                            }
-                        }
+                        Array.Copy(Vertices, (int)size.X, Vertices, 0, Vertices.Length - (int)size.X);
                         for (int x = 0; x < size.X; x++)
                         {
                             this[x, (int)size.Y - 1] = GenerateVertex((int) position.X + x, (int)( position.Y + size.Y));
                         }
                         break;
                     case Direction.Right:
-//                        position -= new Vector2(0, 1);
-//                        Vertices.RemoveRange(Vertices.Count - (int)size.X, (int)size.X);
-//                        List<TerrainVertex> verts = new List<TerrainVertex>();
-//                        for (int x = (int)size.X - 1; x >= 0; x--)
-//                        {
-//                            verts.Add(GenerateVertex((int)position.X - x + (int)size.X, (int)position.Y));
-//                        }
-//                        Vertices.InsertRange(0, verts);
+                        position += new Vector2(0, -1);
+                        Array.Copy(Vertices, 0, Vertices, (int)size.X, Vertices.Length - (int)size.X);
+                        for (int x = 0; x < size.X; x++)
+                        {
+                            this[x, 0] = GenerateVertex((int) position.X + x, (int)( position.Y));
+                        }
                         break;
                     case Direction.Up:
                     case Direction.Down:

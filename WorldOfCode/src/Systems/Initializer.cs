@@ -15,7 +15,7 @@ namespace WorldOfCode
         /// </summary>
         public override void Init()
         {
-            Vector2 size = new Vector2(2500, 2500);
+            Vector2 size = new Vector2(500, 500);
             Entity terrain = new Entity();
             terrain.AddComponents(new Terrain(size));
             
