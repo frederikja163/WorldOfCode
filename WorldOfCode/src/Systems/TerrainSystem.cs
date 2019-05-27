@@ -1,3 +1,4 @@
+using OpenTK;
 using OpenTK.Input;
 
 namespace WorldOfCode
@@ -5,7 +6,7 @@ namespace WorldOfCode
     /// <summary>
     /// Renders all entities
     /// </summary>
-    public class RendererSystem : BaseSystem
+    public class TerrainSystem : BaseSystem
     {
         //The shader is only stored here atm as a test
         private Shader _shader = new Shader();
@@ -26,9 +27,41 @@ namespace WorldOfCode
         {
             EventManager.Draw += Draw;
             EventManager.Dispose += Dispose;
+            EventManager.Update += Update;
             _shader.Init("res/terrain.shade");
         }
 
+        /// <summary>
+        /// Update the position of the terrain
+        /// </summary>
+        private void Update()
+        {
+            for (int i = 0; i < Entities.Count; i++)
+            {
+                Terrain terrain = Entities[i].GetComponent<Terrain>();
+                Vector2 movement = Camera.Main.Position.Xz - terrain.Position;
+                if (movement.X >= 1)
+                {
+                    terrain.MoveTerrain(Direction.Left);
+                }
+                else if (movement.X <= -1)
+                {
+                    terrain.MoveTerrain(Direction.Right);
+                }
+                if (movement.Y >= 1)
+                {
+                    terrain.MoveTerrain(Direction.Forward);
+                }
+                else if (movement.Y <= -1)
+                {
+                    terrain.MoveTerrain(Direction.Back);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Dispose the system
+        /// </summary>
         private void Dispose()
         {
             _shader.Dispose();
@@ -42,11 +75,6 @@ namespace WorldOfCode
             _shader.Bind();
             _shader.Uniform("u_view", ref Camera.Main.View);
             _shader.Uniform("u_projection", ref Camera.Main.Projection);
-            KeyboardState keyboardInput = Keyboard.GetState();
-            if (keyboardInput.IsKeyDown(Key.K))
-            {
-                Entities[0].GetComponent<Terrain>().MoveTerrain(Direction.Left);
-            }
             for (int i = 0; i < Entities.Count; i++)
             {
                 Terrain terrain = Entities[i].GetComponent<Terrain>();

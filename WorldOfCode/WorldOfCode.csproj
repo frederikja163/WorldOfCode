@@ -76,7 +76,7 @@
     <Compile Include="src\Rendering\VertexBuffer.cs" />
     <Compile Include="src\Systems\Initializer.cs" />
     <Compile Include="src\Systems\PlayerMovement.cs" />
-    <Compile Include="src\Systems\RendererSystem.cs" />
+    <Compile Include="src\Systems\TerrainSystem.cs" />
     <Compile Include="src\Vendor\FastNoise.cs" />
     <Compile Include="src\Window.cs" />
   </ItemGroup>

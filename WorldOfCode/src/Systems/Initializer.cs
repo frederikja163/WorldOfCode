@@ -22,7 +22,7 @@ namespace WorldOfCode
             //Create the main camera1
             Camera camera = new Camera();
             camera.Position = new Vector3(0, 3, 0);
-            camera.Yaw = 0;
+            camera.Yaw = 90;
             Entity player = new Entity();
             player.AddComponents(new PlayerInput(25f, 0.2f), camera);
             EcsManager.AddEntities(player, terrain);
