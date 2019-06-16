@@ -1,0 +1,23 @@
+[
+  {
+    "Typography": {
+      "Amplitude": 0.0,
+      "Frequency": 0.0,
+      "MinHeight": 0.0
+    },
+    "Color": {
+      "R": 0.0,
+      "G": 0.0,
+      "B": 0.0,
+      "A": 0.0
+    },
+    "Humidity": {
+      "Min": 0.0,
+      "Max": 0.0
+    },
+    "Temperature": {
+      "Min": 0.0,
+      "Max": 0.0
+    }
+  }
+]

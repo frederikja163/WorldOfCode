@@ -1,3 +1,4 @@
+using OpenTK;
 using OpenTK.Graphics;
 
 namespace WorldOfCode.Modding
@@ -10,7 +11,7 @@ namespace WorldOfCode.Modding
         /// <summary>
         /// Defines typography for a biome
         /// </summary>
-        public struct Typography
+        public struct TypographyInfo
         {
             /// <summary>
             /// The amplitude of hills in the biome
@@ -29,11 +30,21 @@ namespace WorldOfCode.Modding
         /// <summary>
         /// Defines the typography for the biome
         /// </summary>
-        public Typography Hill { get; set; }
+        public TypographyInfo Typography { get; set; }
 
         /// <summary>
         /// The color of the biome
         /// </summary>
         public Color4 Color { get; set; }
+        
+        /// <summary>
+        /// The minimum position for the biome
+        /// </summary>
+        public Vector2 Min { get; set; }
+        
+        /// <summary>
+        /// The maximum position for the biome
+        /// </summary>
+        public Vector2 Max { get; set; }
     }
 }

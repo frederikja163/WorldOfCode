@@ -42,19 +42,19 @@ namespace WorldOfCode
                 Vector2 movement = Camera.Main.Position.Xz - terrain.Position;
                 if (movement.X >= 1)
                 {
-                    terrain.MoveTerrain(Direction.Left);
+                    terrain.MoveTerrain(Direction.Left, (int)movement.X);
                 }
                 else if (movement.X <= -1)
                 {
-                    terrain.MoveTerrain(Direction.Right);
+                    terrain.MoveTerrain(Direction.Right, (int)-movement.X);
                 }
                 if (movement.Y >= 1)
                 {
-                    terrain.MoveTerrain(Direction.Forward);
+                    terrain.MoveTerrain(Direction.Forward, (int)movement.Y);
                 }
                 else if (movement.Y <= -1)
                 {
-                    terrain.MoveTerrain(Direction.Back);
+                    terrain.MoveTerrain(Direction.Back, (int)-movement.Y);
                 }
             }
         }

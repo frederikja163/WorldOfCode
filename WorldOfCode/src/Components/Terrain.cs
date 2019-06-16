@@ -101,9 +101,9 @@ namespace WorldOfCode
             set { Vertices[x + y * (int) _size.Y] = value; }
         }
 
-        private TerrainVertex GenerateVertex(float x, float y)
+        private TerrainVertex GenerateVertex(float x, float y) //Take in a position adder
         {
-            return Map.GetVertex(x + y % 2 * 0.5f - _size.X / 2 + Position.X, y * (float) Math.Sin(1.0472) - _size.Y / 2 + Position.Y);
+            return Map.GetVertex(x + y % 2 * 0.5f - _size.X / 2 + Position.X, y + Position.Y - _size.Y / 2);
         }
 
         /// <summary>
@@ -111,50 +111,62 @@ namespace WorldOfCode
         /// </summary>
         /// <param name="direction">Direction, can be either forward, back, left or right</param>
         /// <exception cref="ArgumentException">Thrown if direction is up or down</exception>
-        public void MoveTerrain(Direction direction)
+        public void MoveTerrain(Direction direction, int amount = 1)
         {
-            for (int i = 0; i < 2; i++)
+            Logger.Msg("Start" + amount);
+            amount *= 2;
+            switch (direction)
             {
-                switch (direction)
-                {
-                    case Direction.Forward:
-                        Position += new Vector2(0, 1);
-                        Array.Copy(Vertices, (int)_size.X, Vertices, 0, Vertices.Length - (int)_size.X);
-                        for (int x = 0; x < _size.X; x++)
+                case Direction.Forward:
+                    Position += Vector2.UnitY * amount;
+                    Array.Copy(Vertices, (int)_size.X * amount, Vertices, 0, Vertices.Length - (int)_size.X * amount);
+                    for (int x = 0; x < _size.X; x++)
+                    {
+                        for (int i = 1; i <= amount; i++)
                         {
-                            this[x, (int)_size.Y - 1] = GenerateVertex(x,  _size.Y);
+                            this[x, (int) _size.Y - i] = GenerateVertex(x, _size.Y + amount - i);
                         }
-                        break;
-                    case Direction.Back:
-                        Position += new Vector2(0, -1);
-                        Array.Copy(Vertices, 0, Vertices, (int)_size.X, Vertices.Length - (int)_size.X);
-                        for (int x = 0; x < _size.X; x++)
+                    }
+                    break;
+                case Direction.Back:
+                    Position -= Vector2.UnitY * amount;
+                    Array.Copy(Vertices, 0, Vertices, (int)_size.X * amount, Vertices.Length - (int)_size.X * amount);
+                    for (int x = 0; x < _size.X; x++)
+                    {
+                        for (int i = 0; i < amount; i++)
                         {
-                            this[x, 0] = GenerateVertex(x, 0);
+                            this[x, i] = GenerateVertex(x, i - amount);
                         }
-                        break;
-                    case Direction.Left:
-                        Position += new Vector2(1, 0);
-                        for (int y = 0; y < _size.X; y++)
+                    }
+                    break;
+                case Direction.Left:
+                    Position += Vector2.UnitX * amount;
+                    for (int y = 0; y < _size.X; y++)
+                    {
+                        Array.Copy(Vertices, y * (int)_size.X + amount, Vertices, y * (int)_size.X, (int)_size.X - amount);
+                        for (int i = 1; i <= amount; i++)
                         {
-                            Array.Copy(Vertices, y * (int)_size.X + 1, Vertices, y * (int)_size.X, (int)_size.X - 1);
-                            this[(int)_size.X - 1, y] = GenerateVertex( _size.X, y);
+                            this[(int)_size.X - i, y] = GenerateVertex( _size.X + amount - i, y);
                         }
-                        break;
-                    case Direction.Right:
-                        Position += new Vector2(-1, 0);
-                        for (int y = 0; y < _size.X; y++)
+                    }
+                    break;
+                case Direction.Right:
+                    Position -= Vector2.UnitX * amount;
+                    for (int y = 0; y < _size.X; y++)
+                    {
+                        Array.Copy(Vertices, y * (int)_size.X, Vertices, y * (int)_size.X + amount, (int)_size.X - amount);
+                        for (int i = 0; i < amount; i++)
                         {
-                            Array.Copy(Vertices, y * (int)_size.X, Vertices, y * (int)_size.X + 1, (int)_size.X - 1);
-                            this[0, y] = GenerateVertex(0, y);
+                            this[i, y] = GenerateVertex(i - amount, y);
                         }
-                        break;
-                    default:
-                        throw new ArgumentException("Invalid direction, direction must be either forward, backward, right or left.");
-                }
+                    }
+                    break;
+                default:
+                    throw new ArgumentException("Invalid direction, direction must be either forward, backward, right or left.");
             }
 
             Vao.Vbo.ChangeData(Vertices);
+            Logger.Msg("End");
         }
 
         /// <summary>
