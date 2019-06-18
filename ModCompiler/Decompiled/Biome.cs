@@ -9,9 +9,9 @@ namespace ModCompiler.Decompiled
     public struct Biome
     {
         /// <summary>
-        /// Defines typography for a biome
+        /// Defines topology for a biome
         /// </summary>
-        public struct TypographyInfo
+        public struct TopologyInfo
         {
             /// <summary>
             /// The amplitude of hills in the biome
@@ -43,9 +43,9 @@ namespace ModCompiler.Decompiled
         }
         
         /// <summary>
-        /// Defines the typography for the biome
+        /// Defines the topology for the biome
         /// </summary>
-        public TypographyInfo Typography { get; set; }
+        public TopologyInfo Topology { get; set; }
 
         /// <summary>
         /// The color of the biome

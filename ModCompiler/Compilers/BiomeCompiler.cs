@@ -47,7 +47,7 @@ namespace ModCompiler.Compilers
                     Color = new Color4(NextAttrib(), NextAttrib(), NextAttrib(), NextAttrib()),
                     Min = new Vector2(NextAttrib(), NextAttrib()),
                     Max = new Vector2(NextAttrib(), NextAttrib()),
-                    Typography = new Compiled.Biome.TypographyInfo()
+                    Topology = new Compiled.Biome.TopologyInfo()
                     {
                         Amplitude = NextAttrib(),
                         Frequency = NextAttrib(),
@@ -84,11 +84,11 @@ namespace ModCompiler.Compilers
                 converted[i] = new Compiled.Biome()
                 {
                     Color = biomes[i].Color,
-                    Typography = new Compiled.Biome.TypographyInfo()
+                    Topology = new Compiled.Biome.TopologyInfo()
                     {
-                        Amplitude = b.Typography.Amplitude,
-                        Frequency = b.Typography.Frequency,
-                        MinHeight = b.Typography.Amplitude
+                        Amplitude = b.Topology.Amplitude,
+                        Frequency = b.Topology.Frequency,
+                        MinHeight = b.Topology.Amplitude
                     },
                     Min = new Vector2()
                     {
@@ -120,11 +120,11 @@ namespace ModCompiler.Compilers
                 converted[i] = new Decompiled.Biome()
                 {
                     Color = biomes[i].Color,
-                    Typography = new Decompiled.Biome.TypographyInfo()
+                    Topology = new Decompiled.Biome.TopologyInfo()
                     {
-                        Amplitude = b.Typography.Amplitude,
-                        Frequency = b.Typography.Frequency,
-                        MinHeight = b.Typography.Amplitude
+                        Amplitude = b.Topology.Amplitude,
+                        Frequency = b.Topology.Frequency,
+                        MinHeight = b.Topology.Amplitude
                     },
                     Humidity = new Decompiled.Biome.BoundaryInfo()
                     {
@@ -155,7 +155,7 @@ namespace ModCompiler.Compilers
             {
                 Compiled.Biome b = biomes[i];
                 returnVal += $"[b:{b.Color.R},{b.Color.G},{b.Color.B},{b.Color.A},{b.Min.X},{b.Min.Y},{b.Max.X},{b.Max.Y}," + 
-                             $"{b.Typography.Amplitude},{b.Typography.Frequency},{b.Typography.MinHeight}]\n";
+                             $"{b.Topology.Amplitude},{b.Topology.Frequency},{b.Topology.MinHeight}]\n";
             }
             return returnVal;
         }

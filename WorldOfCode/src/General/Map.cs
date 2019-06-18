@@ -55,8 +55,8 @@ namespace WorldOfCode
             Biome biome = ModLoader.GetBiome(humidity, temperature);
             
             //Set the data for the vertex
-            _height.SetFrequency(biome.Typography.Frequency);
-            vertex.Position = new Vector3(x, (_height.GetPerlin(x, y) + 0.5f) * biome.Typography.Amplitude + biome.Typography.MinHeight, y);
+            _height.SetFrequency(biome.Topology.Frequency);
+            vertex.Position = new Vector3(x, (_height.GetPerlin(x, y) + 0.5f) * biome.Topology.Amplitude + biome.Topology.MinHeight, y);
             vertex.Color = biome.Color;
             
             return vertex;
