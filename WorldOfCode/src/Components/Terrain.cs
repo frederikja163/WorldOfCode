@@ -113,7 +113,6 @@ namespace WorldOfCode
         /// <exception cref="ArgumentException">Thrown if direction is up or down</exception>
         public void MoveTerrain(Direction direction, int amount = 1)
         {
-            Logger.Msg("Start" + amount);
             amount *= 2;
             switch (direction)
             {
@@ -166,7 +165,6 @@ namespace WorldOfCode
             }
 
             Vao.Vbo.ChangeData(Vertices);
-            Logger.Msg("End");
         }
 
         /// <summary>

@@ -51,7 +51,7 @@
     <Compile Include="ModCompiler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Compilers\Biome.cs" />
+    <Compile Include="Compilers\BiomeCompiler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OpenTK.dll.config" />

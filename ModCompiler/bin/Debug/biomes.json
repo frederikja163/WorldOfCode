@@ -1,23 +1,86 @@
 [
   {
     "Typography": {
-      "Amplitude": 0.0,
+      "Amplitude": 5.0,
+      "Frequency": 1.0,
+      "MinHeight": 5.0
+    },
+    "Color": {
+      "R": 1.0,
+      "G": 0.0,
+      "B": 0.0,
+      "A": 1.0
+    },
+    "Humidity": {
+      "Min": 0.0,
+      "Max": 0.5
+    },
+    "Temperature": {
+      "Min": 0.5,
+      "Max": 1.0
+    }
+  },
+  {
+    "Typography": {
+      "Amplitude": 1.0,
+      "Frequency": 1.0,
+      "MinHeight": 1.0
+    },
+    "Color": {
+      "R": 0.0,
+      "G": 1.0,
+      "B": 0.0,
+      "A": 1.0
+    },
+    "Humidity": {
+      "Min": 0.5,
+      "Max": 1.0
+    },
+    "Temperature": {
+      "Min": 0.5,
+      "Max": 1.0
+    }
+  },
+  {
+    "Typography": {
+      "Amplitude": 5.0,
+      "Frequency": 10.0,
+      "MinHeight": 5.0
+    },
+    "Color": {
+      "R": 1.0,
+      "G": 1.0,
+      "B": 1.0,
+      "A": 1.0
+    },
+    "Humidity": {
+      "Min": 0.0,
+      "Max": 0.5
+    },
+    "Temperature": {
+      "Min": 0.0,
+      "Max": 0.5
+    }
+  },
+  {
+    "Typography": {
+      "Amplitude": 5.0,
       "Frequency": 0.0,
-      "MinHeight": 0.0
+      "MinHeight": 5.0
     },
     "Color": {
       "R": 0.0,
       "G": 0.0,
-      "B": 0.0,
-      "A": 0.0
+      "B": 1.0,
+      "A": 1.0
     },
     "Humidity": {
-      "Min": 0.0,
-      "Max": 0.0
+      "Min": 0.5,
+      "Max": 1.0
     },
     "Temperature": {
       "Min": 0.0,
-      "Max": 0.0
+      "Max": 0.5
     }
   }
 ]

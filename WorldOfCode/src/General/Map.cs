@@ -1,4 +1,5 @@
 using System;
+using ModCompiler.Compiled;
 using OpenTK;
 using OpenTK.Graphics;
 using WorldOfCode.Modding;

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Globalization;
 using Newtonsoft.Json;
 using OpenTK;
 using OpenTK.Graphics;
@@ -8,7 +9,7 @@ namespace ModCompiler.Compilers
     /// <summary>
     /// Compiles and decompiles biomes
     /// </summary>
-    public static class Biome
+    public static class BiomeCompiler
     {
         
         /// <summary>
@@ -18,6 +19,7 @@ namespace ModCompiler.Compilers
         /// <returns>An array containing all the biomes contained in the string</returns>
         public static Compiled.Biome[] CompiledFromString(string str)
         {
+            CultureInfo.CurrentCulture = CultureInfo.CreateSpecificCulture("en-Ca");
             List<Compiled.Biome> biomes = new List<Compiled.Biome>();
             string[] lines = str.Split('\n');
             for (int i = 0; i < lines.Length; i++)
@@ -64,6 +66,7 @@ namespace ModCompiler.Compilers
         /// <returns>An array containing all the biomes contained in the string</returns>
         public static Decompiled.Biome[] DecompiledFromString(string str)
         {
+            CultureInfo.CurrentCulture = CultureInfo.CreateSpecificCulture("en-Ca");
             return JsonConvert.DeserializeObject<Decompiled.Biome[]>(str);
         }
         
@@ -146,6 +149,7 @@ namespace ModCompiler.Compilers
         /// <returns>A string containing information about all the biomes</returns>
         public static string CompiledToString(Compiled.Biome[] biomes)
         {
+            CultureInfo.CurrentCulture = CultureInfo.CreateSpecificCulture("en-Ca");
             string returnVal = "";
             for (int i = 0; i < biomes.Length; i++)
             {
@@ -163,6 +167,7 @@ namespace ModCompiler.Compilers
         /// <returns>A string containing information about all the biomes</returns>
         public static string DecompiledToString(Decompiled.Biome[] biomes)
         {
+            CultureInfo.CurrentCulture = CultureInfo.CreateSpecificCulture("en-Ca");
             return JsonConvert.SerializeObject(biomes, Formatting.Indented);
         }
     }

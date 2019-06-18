@@ -65,7 +65,6 @@
     <Compile Include="src\General\Map.cs" />
     <Compile Include="src\General\TerrainVertex.cs" />
     <Compile Include="src\General\Time.cs" />
-    <Compile Include="src\Modding\Biome.cs" />
     <Compile Include="src\Modding\ModLoader.cs" />
     <Compile Include="src\Rendering\BufferLayout.cs" />
     <Compile Include="src\Rendering\BufferObject.cs" />
@@ -85,15 +84,19 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="mods\biome_color.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="mods\biome_typography.png">
+    <Content Include="..\ModCompiler\bin\Debug\vanilla.woc">
+      <Link>mods\vanilla.woc</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="res\terrain.shade">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ModCompiler\ModCompiler.csproj">
+      <Project>{c00678e0-fe2f-4f90-a9cc-3c58e32f4524}</Project>
+      <Name>ModCompiler</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

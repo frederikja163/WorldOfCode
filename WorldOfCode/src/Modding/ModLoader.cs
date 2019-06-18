@@ -1,4 +1,7 @@
 using System.Drawing;
+using System.IO;
+using ModCompiler.Compiled;
+using ModCompiler.Compilers;
 using OpenTK;
 using OpenTK.Graphics;
 
@@ -9,12 +12,13 @@ namespace WorldOfCode.Modding
     /// </summary>
     public static class ModLoader
     {
+        public static Biome[] biomes;
         /// <summary>
         /// Loads all mods and puts them into memory
         /// </summary>
         public static void Init()
         {
-            
+            biomes = BiomeCompiler.CompiledFromString(File.ReadAllText("mods/vanilla.woc"));
         }
         
         /// <summary>
@@ -25,21 +29,16 @@ namespace WorldOfCode.Modding
         /// <returns>The biome containing the information</returns>
         public static Biome GetBiome(float humidity, float temperature)
         {
-            //Make the return value
-            Biome biome = new Biome();
-            
-//            //Calculate the x and the y
-//            int x = (int) (humidity * (_biomeColor.Width - 1));
-//            int y = (int) (temperature * (_biomeColor.Height - 1));
-//            
-//            //Get the color
-//            Color color = _biomeColor.GetPixel(x, y);
-//            biome.Color = new Color4(color.R, color.G, color.B, color.A);
-//            
-//            //Get the typography
-//            Color typography = _biomeTypography.GetPixel(x, y);
-
-            return biome;
+            for (int i = 0; i < biomes.Length; i++)
+            {
+                Biome b = biomes[i];
+                if (b.Min.X <= humidity && humidity <= b.Max.X && b.Min.Y <= temperature && temperature <= b.Max.Y)
+                {
+                    return b;
+                }
+            }
+            Logger.FatalError($"No biome found at {humidity} humidity and {temperature} temperature");
+            return new Biome();
         }
     }
 }

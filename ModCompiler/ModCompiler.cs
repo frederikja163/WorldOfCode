@@ -18,9 +18,9 @@ namespace ModCompiler
             string mod = "";
             
             //compile the biomes
-            Decompiled.Biome[] decompiled = Biome.DecompiledFromString(File.ReadAllText(Path.Combine(path, "biomes.json")));
-            Compiled.Biome[] compiled = Biome.Compile(decompiled);
-            mod += Biome.CompiledToString(compiled);
+            Decompiled.Biome[] decompiled = BiomeCompiler.DecompiledFromString(File.ReadAllText(Path.Combine(path, "biomes.json")));
+            Compiled.Biome[] compiled = BiomeCompiler.Compile(decompiled);
+            mod += BiomeCompiler.CompiledToString(compiled);
             
             //Write the new mod
             File.WriteAllText(Path.Combine(path, "unnamed.woc"), mod);
@@ -33,9 +33,9 @@ namespace ModCompiler
         public static void DeCompile(string path)
         {
             //compile the biomes
-            Compiled.Biome[] compiled = Biome.CompiledFromString(LoadAllMods(path));
-            Decompiled.Biome[] decompiled = Biome.Decompile(compiled);
-            File.WriteAllText(Path.Combine(path, "biomes.json"), Biome.DecompiledToString(decompiled));
+            Compiled.Biome[] compiled = BiomeCompiler.CompiledFromString(LoadAllMods(path));
+            Decompiled.Biome[] decompiled = BiomeCompiler.Decompile(compiled);
+            File.WriteAllText(Path.Combine(path, "biomes.json"), BiomeCompiler.DecompiledToString(decompiled));
         }
 
         /// <summary>
