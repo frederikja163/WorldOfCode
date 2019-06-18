@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using ModCompiler.Compiled;
 using OpenTK;
 using OpenTK.Graphics;
@@ -50,14 +51,46 @@ namespace WorldOfCode
             TerrainVertex vertex = new TerrainVertex();
             
             //Get the biome
-            float humidity = MathHelper.Clamp(_humidity.GetPerlin(x, y) + 0.5f, 0f, 1f);
-            float temperature = MathHelper.Clamp(_temperature.GetPerlin(x, y) + 0.5f, 0f, 1f);
+            float humidity, temperature;
+            void GetHumidityAndTemperature(float xOffset, float yOffset)
+            {
+                humidity = MathHelper.Clamp(_humidity.GetPerlin(x + xOffset, y + yOffset) + 0.5f, 0f, 1f);
+                temperature = MathHelper.Clamp(_temperature.GetPerlin(x + xOffset, y + yOffset) + 0.5f, 0f, 1f);
+            }
+            GetHumidityAndTemperature(0, 0);
             Biome biome = ModLoader.GetBiome(humidity, temperature);
             
             //Set the data for the vertex
-            _height.SetFrequency(biome.Topology.Frequency);
-            vertex.Position = new Vector3(x, (_height.GetPerlin(x, y) + 0.5f) * biome.Topology.Amplitude + biome.Topology.MinHeight, y);
+            float GetYPosition(Biome bio, float xOffset, float yOffset)
+            {
+                _height.SetFrequency(bio.Topology.Frequency);
+                return (_height.GetPerlin(x + xOffset, y + yOffset) + 0.5f) * bio.Topology.Amplitude + bio.Topology.MinHeight;
+            }
+            vertex.Position = new Vector3(x, GetYPosition(biome, 0, 0), y);
             vertex.Color = biome.Color;
+            
+            //Check for biome blending
+            void BlendBiomes(float xOffSet, float yOffset)
+            {
+                //Step 1: Check if it is still the same biome
+                GetHumidityAndTemperature(xOffSet, yOffset);
+                if (biome.boundary.Contains(new Vector2(humidity, temperature)))
+                {
+                    return;
+                }
+                
+                //Step 2: Get the new biome
+                Biome b = ModLoader.GetBiome(humidity, temperature);
+                
+                //Step 3: Blend the biomes
+                vertex.Position -= Vector3.UnitY * (vertex.Position.Y - GetYPosition(b, xOffSet, yOffset)) / 2f;
+//                vertex.Color = Color4.FromHsv(Color4.ToHsv(biome.Color) + (Color4.ToHsv(biome.Color) - Color4.ToHsv(b.Color) / 2f));
+            }
+            
+            BlendBiomes(10, 0);
+            BlendBiomes(-10, 0);
+            BlendBiomes(0, 10);
+            BlendBiomes(0, -10);
             
             return vertex;
         }

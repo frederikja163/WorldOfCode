@@ -32,7 +32,7 @@ namespace WorldOfCode.Modding
             for (int i = 0; i < biomes.Length; i++)
             {
                 Biome b = biomes[i];
-                if (b.Min.X <= humidity && humidity <= b.Max.X && b.Min.Y <= temperature && temperature <= b.Max.Y)
+                if (b.boundary.Contains(new Vector2(humidity, temperature)))
                 {
                     return b;
                 }

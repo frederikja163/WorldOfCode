@@ -38,13 +38,8 @@ namespace ModCompiler.Compiled
         public Color4 Color { get; set; }
         
         /// <summary>
-        /// The minimum position for the biome
+        /// The boundary of the biome
         /// </summary>
-        public Vector2 Min { get; set; }
-        
-        /// <summary>
-        /// The maximum position for the biome
-        /// </summary>
-        public Vector2 Max { get; set; }
+        public Box2 boundary { get; set; }
     }
 }

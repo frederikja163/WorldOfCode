@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Globalization;
+using ModCompiler.Decompiled;
 using Newtonsoft.Json;
 using OpenTK;
 using OpenTK.Graphics;
@@ -45,8 +46,7 @@ namespace ModCompiler.Compilers
                 biomes.Add(new Compiled.Biome()
                 {
                     Color = new Color4(NextAttrib(), NextAttrib(), NextAttrib(), NextAttrib()),
-                    Min = new Vector2(NextAttrib(), NextAttrib()),
-                    Max = new Vector2(NextAttrib(), NextAttrib()),
+                    boundary = new Box2(NextAttrib(), NextAttrib(), NextAttrib(), NextAttrib()),
                     Topology = new Compiled.Biome.TopologyInfo()
                     {
                         Amplitude = NextAttrib(),
@@ -90,16 +90,7 @@ namespace ModCompiler.Compilers
                         Frequency = b.Topology.Frequency,
                         MinHeight = b.Topology.Amplitude
                     },
-                    Min = new Vector2()
-                    {
-                        X = b.Humidity.Min,
-                        Y = b.Temperature.Min
-                    },
-                    Max = new Vector2()
-                    {
-                        X = b.Humidity.Max,
-                        Y = b.Temperature.Max
-                    }
+                    boundary = new Box2(b.Humidity.Min, b.Temperature.Min, b.Humidity.Max, b.Temperature.Max)
                 };
             }
 
@@ -128,13 +119,13 @@ namespace ModCompiler.Compilers
                     },
                     Humidity = new Decompiled.Biome.BoundaryInfo()
                     {
-                        Min = b.Min.X,
-                        Max = b.Max.X
+                        Min = b.boundary.Left,
+                        Max = b.boundary.Right
                     },
                     Temperature = new Decompiled.Biome.BoundaryInfo()
                     {
-                        Min = b.Min.Y,
-                        Max = b.Max.Y
+                        Min = b.boundary.Top,
+                        Max = b.boundary.Bottom
                     }
                 };
             }
@@ -154,7 +145,7 @@ namespace ModCompiler.Compilers
             for (int i = 0; i < biomes.Length; i++)
             {
                 Compiled.Biome b = biomes[i];
-                returnVal += $"[b:{b.Color.R},{b.Color.G},{b.Color.B},{b.Color.A},{b.Min.X},{b.Min.Y},{b.Max.X},{b.Max.Y}," + 
+                returnVal += $"[b:{b.Color.R},{b.Color.G},{b.Color.B},{b.Color.A},{b.boundary.Left},{b.boundary.Top},{b.boundary.Right},{b.boundary.Bottom}," + 
                              $"{b.Topology.Amplitude},{b.Topology.Frequency},{b.Topology.MinHeight}]\n";
             }
             return returnVal;
