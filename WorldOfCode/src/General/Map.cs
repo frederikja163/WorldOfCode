@@ -70,20 +70,56 @@ namespace WorldOfCode
             vertex.Color = biome.Color;
             
             //Check for biome blending
-            void BlendBiomes(float xOffSet, float yOffset)
+            void BlendBiomes(float xOffset, float yOffset)
             {
-                //Step 1: Check if it is still the same biome
-                GetHumidityAndTemperature(xOffSet, yOffset);
-                if (biome.boundary.Contains(new Vector2(humidity, temperature)))
+                Vector2 checkOffset = new Vector2(xOffset, yOffset);
+                float thisY = 0;
+                
+                //Step 1: Check when the border of the biomes are
+                while(xOffset != 0 || yOffset != 0)
                 {
-                    return;
+                    //Get the humidity and temperature
+                    GetHumidityAndTemperature(xOffset, yOffset);
+                    //Check if it is within the original biome
+                    if (biome.boundary.Contains(new Vector2(humidity, temperature)))
+                    {
+                        if (xOffset == checkOffset.X && yOffset == checkOffset.Y)
+                        {
+                            return;
+                        }
+                        break;
+                    }
+                    //Move one step closer to no offset
+                    xOffset -= xOffset > 0 ? 1 : xOffset < 0 ? -1 : 0;
+                    yOffset -= yOffset > 0 ? 1 : yOffset < 0 ? -1 : 0;
                 }
+                //(We need to put the x- and yOffset one back)
+                thisY = GetYPosition(biome, xOffset, yOffset);
+                xOffset += checkOffset.X > 0 ? 1 : checkOffset.X < 0 ? -1 : 0;
+                yOffset += checkOffset.Y > 0 ? 1 : checkOffset.Y < 0 ? -1 : 0;
+
                 
                 //Step 2: Get the new biome
+                GetHumidityAndTemperature(xOffset, yOffset);
                 Biome b = ModLoader.GetBiome(humidity, temperature);
                 
-                //Step 3: Blend the biomes
-                vertex.Position -= Vector3.UnitY * (vertex.Position.Y - GetYPosition(b, xOffSet, yOffset)) / 2f;
+                //Step 3: Calculate the blend proportion
+                float blendProportion = 1;
+                if (xOffset != checkOffset.X)
+                {
+                    blendProportion = xOffset / checkOffset.X;
+                }
+
+                if (yOffset != checkOffset.Y)
+                {
+                    blendProportion *= yOffset / checkOffset.Y;
+                }
+                
+                //Step 4: Blend the biomes
+                float otherY = GetYPosition(b, xOffset, yOffset);
+                Vector3 position = vertex.Position;
+                position.Y =  ((otherY - thisY) / 2 + thisY) * (1 - blendProportion) + position.Y * blendProportion;
+                vertex.Position = position;
 //                vertex.Color = Color4.FromHsv(Color4.ToHsv(biome.Color) + (Color4.ToHsv(biome.Color) - Color4.ToHsv(b.Color) / 2f));
             }
             
