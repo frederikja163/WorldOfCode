@@ -24,3 +24,5 @@ ModCompiler/obj/Debug/
 ModCompiler/bin/Debug/
 
 WorldOfCode/bin/Debug/
+
+*.exe
