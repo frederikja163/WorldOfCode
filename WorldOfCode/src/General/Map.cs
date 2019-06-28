@@ -54,8 +54,8 @@ namespace WorldOfCode
             float humidity, temperature;
             void GetHumidityAndTemperature(float xOffset, float yOffset)
             {
-                humidity = MathHelper.Clamp(_humidity.GetPerlin(x + xOffset, y + yOffset) + 0.5f, 0f, 1f);
-                temperature = MathHelper.Clamp(_temperature.GetPerlin(x + xOffset, y + yOffset) + 0.5f, 0f, 1f);
+                humidity = MathHelper.Clamp(_humidity.GetValueFractal(x + xOffset, y + yOffset) + 0.5f, 0f, 1f);
+                temperature = MathHelper.Clamp(_temperature.GetValueFractal(x + xOffset, y + yOffset) + 0.5f, 0f, 1f);
             }
             GetHumidityAndTemperature(0, 0);
             Biome biome = ModLoader.GetBiome(humidity, temperature);
@@ -64,7 +64,7 @@ namespace WorldOfCode
             float GetYPosition(Biome bio, float xOffset, float yOffset)
             {
                 _height.SetFrequency(bio.Topology.Frequency);
-                return (_height.GetPerlin(x + xOffset, y + yOffset) + 0.5f) * bio.Topology.Amplitude + bio.Topology.MinHeight;
+                return (_height.GetSimplexFractal(x + xOffset, y + yOffset) + 0.5f) * bio.Topology.Amplitude + bio.Topology.MinHeight;
             }
             vertex.Position = new Vector3(x, GetYPosition(biome, 0, 0), y);
             vertex.Color = biome.Color;
@@ -120,7 +120,6 @@ namespace WorldOfCode
                 Vector3 position = vertex.Position;
                 position.Y =  ((otherY - thisY) / 2 + thisY) * (1 - blendProportion) + position.Y * blendProportion;
                 vertex.Position = position;
-//                vertex.Color = Color4.FromHsv(Color4.ToHsv(biome.Color) + (Color4.ToHsv(biome.Color) - Color4.ToHsv(b.Color) / 2f));
             }
             
             BlendBiomes(10, 0);
